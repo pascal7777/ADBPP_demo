@@ -1,0 +1,232 @@
+<% layout('layouts/boilerplate')%>
+
+    <h1 style="font-size: 2.5vw">Goods, Works and NCS Packages</h1>
+    
+    <div class="d-flex bd-highlight"> <input type=" text" id="myInput3" onkeyup="myFunction()"
+        style="width:15em; padding: 2px 2px 5px 10px" placeholder="Filter for Project (description)...">
+    </div>
+
+    <div class="table-responsive">
+        <table class="table" ; id="eoiTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">
+                    Package Number
+                    </th>
+                    <th>
+                    Project Number
+                    </th>
+                    <th>
+                    Project Description
+                    </th>
+                    <th onclick="sortTable(0)">
+                    Country
+                    </th>
+                    <th>
+                    Package Description
+                    </th>
+                    <th>
+                    Est. Value (US$)
+                    </th>
+                    <th>
+                    Procurement Method
+                    </th>
+                    <th>
+                    Nr of Lots/contracts
+                    </th>
+                    <th>
+                    Standard Bid Document
+                    </th>
+                    <th>
+                    Advertising
+                    </th>
+                    <th>
+                    Approach
+                    </th>
+                    <th>
+                    ADB Review
+                    </th>
+                    <th>
+                    Status
+                    </th>
+                    <th>
+                    Last update status
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+            <% for (let expression of expressions){%>
+                <td>
+                    <%  if( currentUser && expression.author.equals(currentUser._id) || currentUser &&
+                        currentUser.isAdmin || currentUser &&
+                        currentUser.isADB)  {%>
+                        <a style=color:blue" href="/expressions/<%= expression._id %>"><%= expression.number %></a>
+                        <% } else{ %>
+                            <%= expression.number%>
+                        <% } %>
+                </td>
+                <td>
+                    <%=expression.product.number%> 
+                </td>
+                <td>
+                    <%=expression.product.name%>
+                </td>
+                <td>
+                    <%=expression.product.country%>
+                </td>
+                <td>
+                    <%=expression.description%>
+                </td>
+                <td>  <% if(expression.value!=null) {%>
+                    <%=expression.value.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                    <% } %> 
+                </td>
+                <td>
+                    <%=expression.method%>
+                </td>
+                <td>
+                    <%=expression.lots%>
+                </td>
+                <td>
+                    <%=expression.sbd%>
+                </td>
+                <td>
+                    <%=expression.advertising%>
+                </td>
+                <td>
+                    <%=expression.approach%>
+                </td>
+                <td>
+                    <%=expression.review%>
+                </td>
+        
+                <td>
+                    <% if(expression.status==="Scheduled" ) {%>
+                        <span style="color:rgb(6, 6, 241)">
+                            <%=expression.status%>
+                        </span>
+                        <% } %>
+                        <% if(expression.status==="Advertised" ) {%>
+                            <span style="color:rgb(34,187,51)">
+                                <%=expression.status%>
+                            </span>
+                            <% } %>
+                           <% if(expression.status==="Under Evaluation" ) {%>
+                                <span style="color:rgb(246, 219, 9)">
+                                    <%=expression.status%>
+                                </span>   
+                                <% } %>    
+                                <% if(expression.status==="Awarded" ) {%>
+                                    <span style="color:rgb(6, 85, 2)">
+                                        <%=expression.status%>
+                                    </span>   
+                                    <% } %>        
+                                <% if(expression.status==="Cancelled" ) {%>
+                                    <span style="color:rgb(240, 6, 6)">
+                                        <%=expression.status%>
+                                    </span>   
+                                    <% } %>         
+                </td>
+                <td>
+                   <em><%= expression.updatedAt.toDateString()%></em>
+                        <% if(Math.floor( (expression.updatedAt - Date.now())/10368000000) > 1)      {%>
+                            (<%= - Math.floor( (expression.updatedAt - Date.now())/10368000000)%> week(s) ago)
+                            <% } %>  
+                    </td>
+
+
+            </tr>
+            </tbody>  
+            <% }%>
+           
+        </table>
+    </div>
+    <p style="font-size: 12px">ADB = Asian Development Bank, AC = Advance Contracting, CS = Consulting Services, CQS = Consultants’ Qualification Selection, CV = Curriculum Vitae, DPF = Department of Planning and Finance, DPA = Domestic Peference Applied, eGP = electronic Government Procurement System, FM = Financial Management, FTP = Full Technical Proposal, G = Goods, ICS = Individual Consultant Selection, IT = Information Technology, ITB = Invitation to Bid, M&E = Monitoring and Evaluation, NA = not Applicable,  NCS = Nonconsulting Services, OCB = Open Competitive Bidding, PMU = Project Management Unit, PPMD = Procurement and Price Monitoring Division Ministry of Finance, PQ = Prequalification, Q = Quarter, QCBS = Quality Cost Based Selection, RFQ = Request for Quotation, SBD = Standard Bidding Document, 1S2E = single stage, two envelopes,  SRFP = Standard Request for Proposal, SSS = Single Source Selection, STP = Simplified Technical Proposal, TOR = Terms of Teference.</p>
+ 
+ <br>
+ <a style=color:blue" href="/products%>">Project list</a>
+ <script>
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("eoiTable");
+            switching = true;
+            // Set the sorting direction to ascending:
+            dir = "asc";
+            /* Make a loop that will continue until
+            no switching has been done: */
+            while (switching) {
+                // Start by saying: no switching is done:
+                switching = false;
+                rows = table.rows;
+                /* Loop through all table rows (except the
+                first, which contains table headers): */
+                for (i = 1; i < (rows.length - 1); i++) {
+                    // Start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /* Get the two elements you want to compare,
+                    one from current row and one from the next: */
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    /* Check if the two rows should switch place,
+                    based on the direction, asc or desc: */
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /* If a switch has been marked, make the switch
+                    and mark that a switch has been done: */
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    // Each time a switch is done, increase this count by 1:
+                    switchcount++;
+                } else {
+                    /* If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again. */
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <script>
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput3");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("eoiTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+  

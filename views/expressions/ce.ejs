@@ -1,0 +1,207 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container mt-3">
+    <h1>Update CE Certificate Details</h1>
+    
+    <br>
+
+    <h3>
+        Device: <%=expression.type%> <%=expression.name%>  Manufacturer: <%=expression.manufacturer%>
+    </h3>
+    <h3>
+        DOC: <%=expression.DOCType%> - Class: <%=expression.DOCMdClass%><%=expression.DOCIvdClass%>
+    </h3>
+    
+    <br>
+   
+    <form action="/expressions/<%=expression._id%>?_method=PUT" method="POST" novalidate class = "validated-form" enctype="multipart/form-data">
+
+                <div class="mb-3">
+                        <label class="form-label" for="number13485">Certificate Nr. <br>[<span style="color:rgb(8, 96, 249)"><%=expression.number13485%></span>]</label>
+                        
+                        <input class="form-control" type="text" name="expression[number13485]" id="number13485">
+                
+                        <p style="margin-top: 0; color: rgb(0, 34, 255);font-size: 0.8em;"><em>optional</em></p>
+                </div>
+
+                <div class="mb-3">
+                    <div class="row"> <label class="form-label" for="nBody" class="form-label">
+                            <div class="row">
+                                <div class="col-6">
+                                Notified Body <span style="color:rgb(8, 96, 249)"><br>[<%=expression.nBody%>]</span>
+                                </div>
+                            
+                                <div class="col-6">
+                                <p> <a href="https://webgate.ec.europa.eu/single-market-compliance-space/#/notified-bodies" target="_blank">EU Notified Bodies</a> </p>
+                                </div>
+                        </label>
+                    </div>
+                    <input class="form-control"  list="notifiedbody" type="text" name="expression[nBody]" id="nBody">
+                    <datalist id="notifiedbody">
+                                                            <option value="NB 0044 - TÜV NORD CERT GmbH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0050 - National Standards Authority of Ireland (NSAI) - Ireland (93/42/EEC MDD)">
+                                                                <option value="NB 0051 - IMQ ISTITUTO ITALIANO DEL MARCHIO DI QUALITÀ S.P.A. - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 0068 - MTIC InterCert S.r.l. - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 0123 - TÜV SÜD Product Service GmbH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0124 - DEKRA Certification GmbH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0197 - TÜV Rheinland LGA Products GmbH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0297 - DQS Medizinprodukte GmbH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0318 - CENTRO NACIONAL DE CERTIFICACION DE PRODUCTOS SANITARIOS - Spain (93/42/EEC MDD)">
+                                                                <option value="NB 0344 - DEKRA Certification B.V. - Netherlands (93/42/EEC MDD)">
+                                                                <option value="NB 0373 - ISTITUTO SUPERIORE DI SANITA' - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 0402 - RISE Research Institutes of Sweden AB - Sweden (93/42/EEC MDD)">
+                                                                <option value="NB 0413 - INTERTEK SEMKO AB - Sweden (93/42/EEC MDD)">
+                                                                <option value="NB 0425 - ICIM S.P.A. - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 0426 - ITALCERT SRL - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 0459 - GMED SAS - France (93/42/EEC MDD)">
+                                                                <option value="NB 0476 - KIWA CERMET ITALIA S.P.A. - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 0477 - Eurofins Product Testing Italy S.r.l. - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 0482 - DNV MEDCERT GmbH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0483 - MDC MEDICAL DEVICE CERTIFICATION GMBH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0494 - SLG PRÜF UND ZERTIFIZIERUNGS GMBH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0537 - Eurofins Electric & Electronics Finland Oy - Finland (93/42/EEC MDD)">
+                                                                <option value="NB 0546 - CERTIQUALITY S.r.l. - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 0598 ex:403 - SGS FIMKO OY - Finland (93/42/EEC MDD)">
+                                                                <option value="NB 0633 - Berlin Cert Prüf- und Zertifizierstelle für Medizinprodukte GmbH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0653 - NATIONAL EVALUATION CENTER OF QUALITY AND TECHNOLOGY IN HEALTH S.A.- EKAPTY - Greece (93/42/EEC MDD)">
+                                                                <option value="NB 0681 - Eurofins Product Service GmbH - Germany (93/42/EEC MDD)">
+                                                                <option value="NB 0805 - THERAPEUTIC GOODS ADMINISTRATION - Australia (MRA) (93/42/EEC MDD)">
+                                                                <option value="NB 1011 - NEOEMKI Nemzeti Orvostechnikai Eszköz Megfelelőségértékelő és Tanúsító Korlátolt Felelősségű Társaság (NEOEMKI LLC) - Hungary (93/42/EEC MDD)">
+                                                                <option value="NB 1014 - ELEKTROTECHNICKÝ ZKUŠEBNÍ ÚSTAV, s.p. - Czech Republic (93/42/EEC MDD)">
+                                                                <option value="NB 1023 - INSTITUT PRO TESTOVÁNI A CERTIFIKACI, a. s. (INSTITUTE FOR TESTING AND CERTIFICATION) merged with ex-NB 1390 - Czech Republic (93/42/EEC MDD)">
+                                                                <option value="NB 1282 - ENTE CERTIFICAZIONE MACCHINE SRL - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 1304 - SLOVENIAN INSTITUTE OF QUALITY AND METROLOGY - SIQ - Slovenia (93/42/EEC MDD)">
+                                                                <option value="NB 1370 - BUREAU VERITAS ITALIA S.P.A. - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 1434 - POLSKIE CENTRUM BADAN I CERTYFIKACJI S.A. - Poland (93/42/EEC MDD)">
+                                                                <option value="NB 1639 - SGS Belgium NV - Belgium (93/42/EEC MDD)">
+                                                                <option value="NB 1783 - TURKISH STANDARDS INSTITUTION (TSE) - Türkiye (93/42/EEC MDD)">
+                                                                <option value="NB 1912 - Kiwa Dare B.V. - Netherlands (93/42/EEC MDD)">
+                                                                <option value="NB 1936 - TUV Rheinland Italia SRL - Italy (93/42/EEC MDD)">
+                                                                <option value="NB 1984 - Kiwa Belgelendirme Hizmetleri A.Ş. - Türkiye (93/42/EEC MDD)">
+                                                                <option value="NB 2195 - Szutest Uygunluk Değerlendirme A.Ş. - Türkiye (93/42/EEC MDD)">
+                                                                <option value="NB 2265 - 3EC International a.s. - Slovakia (93/42/EEC MDD)">
+                                                                <option value="NB 2274 - TUV NORD Polska Sp. z o.o - Poland (93/42/EEC MDD)">
+                                                                <option value="NB 2292 - UDEM Uluslararasi Belgelendirme Denetim Egitim Merkezi San. ve Tic. A.Ş. - Türkiye (93/42/EEC MDD)">
+                                                                <option value="NB 2409 - CE Certiso Orvos- és Kórháztechnikai Ellenőrző és Tanúsító Kft. - Hungary (93/42/EEC MDD)">
+                                                                <option value="NB 2460 - DNV Product Assurance AS - Norway (93/42/EEC MDD)">
+                                                                <option value="NB 2764 - Notice Belgelendirme, Muayene ve Denetim Hizmetleri Anonim Şirketi - Türkiye (93/42/EEC MDD)">
+                                                                <option value="NB 2797 - BSI Group The Netherlands B.V. - Netherlands (93/42/EEC MDD)">
+                                                                <option value="NB 2803 - HTCert (Health Technology Certification Ltd) - Cyprus (93/42/EEC MDD)">
+                                                                <option value="NB 2854 - bqs. s.r.o. - Slovakia (93/42/EEC MDD)">
+                                                                <option value="NB 0805 - THERAPEUTIC GOODS ADMINISTRATION - Australia (MRA) (93/42/EEC MDD)">
+                                                                <option value="NB 0050 - National Standards Authority of Ireland (NSAI) - Ireland (98/79EC IVDD)">
+                                                                <option value="NB 0123 - TÜV SÜD Product Service GmbH - Germany (98/79EC IVDD)">
+                                                                <option value="NB 0197 - TÜV Rheinland LGA Products GmbH - Germany (98/79EC IVDD)">
+                                                                <option value="NB 0318 - CENTRO NACIONAL DE CERTIFICACION DE PRODUCTOS SANITARIOS - Spain (98/79EC IVDD)">
+                                                                <option value="NB 0344 - DEKRA Certification B.V. - Netherlands (98/79EC IVDD)">
+                                                                <option value="NB 0373 - ISTITUTO SUPERIORE DI SANITA' - Italy (98/79EC IVDD)">
+                                                                <option value="NB 0459 - GMED SAS - France (98/79EC IVDD)">
+                                                                <option value="NB 0483 - MDC MEDICAL DEVICE CERTIFICATION GMBH - Germany (98/79EC IVDD)">
+                                                                <option value="NB 0537 - Eurofins Electric & Electronics Finland Oy - Finland (98/79EC IVDD)">
+                                                                <option value="NB 0543 - Presafe Denmark A/S - Denmark (98/79EC IVDD)">
+                                                                <option value="NB 1011 - NEOEMKI Nemzeti Orvostechnikai Eszköz Megfelelőségértékelő és Tanúsító Korlátolt Felelősségű Társaság (NEOEMKI LLC) - Hungary (98/79EC IVDD)">
+                                                                <option value="NB 1023 - INSTITUT PRO TESTOVÁNI A CERTIFIKACI, a. s. (INSTITUTE FOR TESTING AND CERTIFICATION) merged with ex-NB 1390 - Czech Republic (98/79EC IVDD)">
+                                                                <option value="NB 1293 - EVPU a.s. - Slovakia (98/79EC IVDD)">
+                                                                <option value="NB 1434 - POLSKIE CENTRUM BADAN I CERTYFIKACJI S.A. - Poland (98/79EC IVDD)">
+                                                                <option value="NB 2265 - 3EC International a.s. - Slovakia (98/79EC IVDD)">
+                                                                <option value="NB 2409 - CE Certiso Orvos- és Kórháztechnikai Ellenőrző és Tanúsító Kft. - Hungary (98/79EC IVDD)">
+                                                                <option value="NB 2797 - BSI Group The Netherlands B.V. - Netherlands (98/79EC IVDD)">
+                                                                <option value="NB 2854 - bqs. s.r.o. - Slovakia (98/79EC IVDD)">
+                                                                <option value="NB 2934 - CeCert Sp. z o.o. - Poland (98/79EC IVDD)">
+                                                                <option value="NB 0044 - TÜV NORD CERT GmbH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 0050 - National Standards Authority of Ireland (NSAI) - Ireland (EU 2017/745 (MDR))">
+                                                                <option value="NB 0051 - IMQ ISTITUTO ITALIANO DEL MARCHIO DI QUALITÀ S.P.A. - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 0123 - TÜV SÜD Product Service GmbH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 0124 - DEKRA Certification GmbH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 0197 - TÜV Rheinland LGA Products GmbH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 0297 - DQS Medizinprodukte GmbH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 0318 - CENTRO NACIONAL DE CERTIFICACION DE PRODUCTOS SANITARIOS - Spain (EU 2017/745 (MDR))">
+                                                                <option value="NB 0344 - DEKRA Certification B.V. - Netherlands (EU 2017/745 (MDR))">
+                                                                <option value="NB 0373 - ISTITUTO SUPERIORE DI SANITA' - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 0425 - ICIM S.P.A. - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 0426 - ITALCERT SRL - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 0459 - GMED SAS - France (EU 2017/745 (MDR))">
+                                                                <option value="NB 0476 - KIWA CERMET ITALIA S.P.A. - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 0477 - Eurofins Product Testing Italy S.r.l. - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 0482 - DNV MEDCERT GmbH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 0483 - MDC MEDICAL DEVICE CERTIFICATION GMBH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 0494 - SLG PRÜF UND ZERTIFIZIERUNGS GMBH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 0537 - Eurofins Electric & Electronics Finland Oy - Finland (EU 2017/745 (MDR))">
+                                                                <option value="NB 0546 - CERTIQUALITY S.r.l. - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 0598 ex:403 - SGS FIMKO OY - Finland (EU 2017/745 (MDR))">
+                                                                <option value="NB 0633 - Berlin Cert Prüf- und Zertifizierstelle für Medizinprodukte GmbH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 1023 - INSTITUT PRO TESTOVÁNI A CERTIFIKACI, a. s. (INSTITUTE FOR TESTING AND CERTIFICATION) merged with ex-NB 1390 - Czech Republic (EU 2017/745 (MDR))">
+                                                                <option value="NB 1282 - ENTE CERTIFICAZIONE MACCHINE SRL - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 1304 - SLOVENIAN INSTITUTE OF QUALITY AND METROLOGY - SIQ - Slovenia (EU 2017/745 (MDR))">
+                                                                <option value="NB 1370 - BUREAU VERITAS ITALIA S.P.A. - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 1434 - POLSKIE CENTRUM BADAN I CERTYFIKACJI S.A. - Poland (EU 2017/745 (MDR))">
+                                                                <option value="NB 1639 - SGS Belgium NV - Belgium (EU 2017/745 (MDR))">
+                                                                <option value="NB 1912 - Kiwa Dare B.V. - Netherlands (EU 2017/745 (MDR))">
+                                                                <option value="NB 1936 - TUV Rheinland Italia SRL - Italy (EU 2017/745 (MDR))">
+                                                                <option value="NB 2265 - 3EC International a.s. - Slovakia (EU 2017/745 (MDR))">
+                                                                <option value="NB 2274 - TUV NORD Polska Sp. z o.o - Poland (EU 2017/745 (MDR))">
+                                                                <option value="NB 2292 - UDEM Uluslararasi Belgelendirme Denetim Egitim Merkezi San. ve Tic. A.Ş. - Türkiye (EU 2017/745 (MDR))">
+                                                                <option value="NB 2409 - CE Certiso Orvos- és Kórháztechnikai Ellenőrző és Tanúsító Kft. - Hungary (EU 2017/745 (MDR))">
+                                                                <option value="NB 2460 - DNV Product Assurance AS - Norway (EU 2017/745 (MDR))">
+                                                                <option value="NB 2696 - UDEM Adriatic d.o.o. - Croatia (EU 2017/745 (MDR))">
+                                                                <option value="NB 2764 - Notice Belgelendirme, Muayene ve Denetim Hizmetleri Anonim Şirketi - Türkiye (EU 2017/745 (MDR))">
+                                                                <option value="NB 2797 - BSI Group The Netherlands B.V. - Netherlands (EU 2017/745 (MDR))">
+                                                                <option value="NB 2803 - HTCert (Health Technology Certification Ltd) - Cyprus (EU 2017/745 (MDR))">
+                                                                <option value="NB 2862 - Intertek Medical Notified Body AB - Sweden (EU 2017/745 (MDR))">
+                                                                <option value="NB 2975 - SZUTEST Konformitätsbewertungsstelle GmbH - Germany (EU 2017/745 (MDR))">
+                                                                <option value="NB 3022 - Scarlet NB B.V. - Netherlands (EU 2017/745 (MDR))">
+                                                                <option value="NB 0050 - National Standards Authority of Ireland (NSAI) - Ireland (EU 2017/745 (IVDR))">
+                                                                <option value="NB 0123 - TÜV SÜD Product Service GmbH - Germany (EU 2017/745 (IVDR))">
+                                                                <option value="NB 0124 - DEKRA Certification GmbH - Germany (EU 2017/745 (IVDR))">
+                                                                <option value="NB 0197 - TÜV Rheinland LGA Products GmbH - Germany (EU 2017/745 (IVDR))">
+                                                                <option value="NB 0344 - DEKRA Certification B.V. - Netherlands (EU 2017/745 (IVDR))">
+                                                                <option value="NB 0459 - GMED SAS - France (EU 2017/745 (IVDR))">
+                                                                <option value="NB 0483 - MDC MEDICAL DEVICE CERTIFICATION GMBH - Germany (EU 2017/745 (IVDR))">
+                                                                <option value="NB 0537 - Eurofins Electric & Electronics Finland Oy - Finland (EU 2017/745 (IVDR))">
+                                                                <option value="NB 2265 - 3EC International a.s. - Slovakia (EU 2017/745 (IVDR))">
+                                                                <option value="NB 2797 - BSI Group The Netherlands B.V. - Netherlands (EU 2017/745 (IVDR))">
+                                                                <option value="NB 2962 - QMD Services GmbH - Austria (EU 2017/745 (IVDR))">
+                                                                <option value="NB 3018 - Sertio Oy - Finland (EU 2017/745 (IVDR))">
+                                                                <option value="Other">
+                    </datalist>
+                    <p style="margin-top: 0; color: rgb(0, 34, 255);font-size: 0.8em;"><em>optional</em></p>
+                </div>  
+
+            <div class="mb-3">      
+                    <label class="form-label" for="CEvalidTo">'Valid to' date <br>[<span style="color:rgb(8, 96, 249)"><%=expression.CEvalidTo.toDateString()%>]</span></label>
+                    <input class="form-control" type="date" name="expression[CEvalidTo]" id="CEvalidTo" required>          
+                        <p style="margin-top: 0; color: red;font-size: 0.8em;"><em>required</em></p>
+            </div>   
+            
+                                
+                                
+            <div class="mb-3">
+                    <label class="form-label" for="CEonLine" class="form-label">Verified online <br> [<span style="color:rgb(8, 96, 249)"><%=expression.CEonLine%></span>]</label>
+                    <input class="form-control" list="yesno2" name="expression[CEonLine]" id="CEonLine">
+                    <datalist id="yesno2">
+                    <option value="Yes, successfull">
+                    <option value="No, not successfull">
+                    <option value="Online check not available">
+                    <option value="Not verified (yet)">
+                    </datalist>
+                    <p style="margin-top: 0; color: rgb(0, 34, 255);font-size: 0.8em;"><em>optional</em></p>
+            </div>  
+        
+
+
+                    <div class="mt-4">
+                        <a class="btn btn-primary btn-sm" href="/expressions/<%=expression._id%>" role="button">Go Back</a>
+                    </div>
+            <br> 
+                    <div class="mb-3">
+                        <button class=" btn btn-warning btn-sm">Confirm changes</button>
+                    </div>
+                    
+        
+
+    </form>
+
+</div>
+  
+  
+  

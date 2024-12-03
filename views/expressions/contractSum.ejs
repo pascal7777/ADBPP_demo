@@ -1,0 +1,145 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container mt-3">
+    
+   
+    <form action="/expressions/<%=expression._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+
+    <div class="row"> 
+        <hr>
+        <div> Contract 1</div>
+
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="contractDate">Contract Date</label>
+                    <input class="form-control" type="date" id="contractDate" name="expression[contractDate]" value="<%=expression.contractDate%>" required>
+                </div>
+            </div>
+        
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="contractName">Contract Name </label>
+                    <input class="form-control" type="string" id="contractName" name="expression[contractName]" value="<%=expression.contractName%>" required>
+                </div>
+            </div>
+        
+           
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="contractSum">Contract Sum (US$)</label>
+                        <input class="form-control" type="number" id="contractSum" name="expression[contractSum]" value="<%=expression.contractSum%>" required>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                <label class="form-label" for="contractType" class="form-label">Contract Type</label>
+                <input class="form-control" list="contracts" id="contractType" name="expression[contractType]" required>
+                <datalist id="contracts">
+                    <option value="Supply of Goods">
+                    <option value="Time based">
+                    <option value="Lump sum">
+                    <option value="Partial lumpsum">
+                    <option value="Transaction based">
+                    <option value="Other">
+                </datalist>
+                </div>
+            </div>
+        
+
+            <br>
+            <hr>
+
+
+       <div> Contract 2</div>
+
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="contractDate2">Contract Date</label>
+                    <input class="form-control" type="date" id="contractDate2" name="expression[contractDate2]" value="<%=expression.contractDate2%>" required>
+                </div>
+            </div>
+        
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="contractName2">Contract Name </label>
+                    <input class="form-control" type="string" id="contractName2" name="expression[contractName2]" value="<%=expression.contractName2%>" required>
+                </div>
+            </div>
+        
+           
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="contractSum2">Contract Sum (US$)</label>
+                        <input class="form-control" type="number" id="contractSum2" name="expression[contractSum2]" value="<%=expression.contractSum2%>" required>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                <label class="form-label" for="contractType2" class="form-label">Contract Type</label>
+                <input class="form-control" list="contracts" id="contractType2" name="expression[contractType2]" required>
+                <datalist id="contracts">
+                    <option value="Supply of Goods">
+                    <option value="Time based">
+                    <option value="Lump sum">
+                    <option value="Partial lumpsum">
+                    <option value="Transaction based">
+                    <option value="Other">
+                </datalist>
+                </div>
+            </div>
+
+            <div> Contract 3</div>
+
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="contractDate3">Contract Date</label>
+                    <input class="form-control" type="date" id="contractDate3" name="expression[contractDate3]" value="<%=expression.contractDate3%>" required>
+                </div>
+            </div>
+        
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="contractName3">Contract Name </label>
+                    <input class="form-control" type="string" id="contractName3" name="expression[contractName3]" value="<%=expression.contractName3%>" required>
+                </div>
+            </div>
+        
+           
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="contractSum3">Contract Sum (US$)</label>
+                        <input class="form-control" type="number" id="contractSum3" name="expression[contractSum3]" value="<%=expression.contractSum3%>" required>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                <label class="form-label" for="contractType3" class="form-label">Contract Type</label>
+                <input class="form-control" list="contracts" id="contractType3" name="expression[contractType3]" required>
+                <datalist id="contracts">
+                    <option value="Supply of Goods">
+                    <option value="Time based">
+                    <option value="Lump sum">
+                    <option value="Partial lumpsum">
+                    <option value="Transaction based">
+                    <option value="Other">
+                </datalist>
+                </div>
+            </div>
+
+
+        <div class="mb-3">
+                <button class=" btn btn-warning btn-sm">Confirm</button>
+        </div>
+
+        
+    </div>           
+    </form>
+
+</div>
+  

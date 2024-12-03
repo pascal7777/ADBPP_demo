@@ -1,0 +1,98 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="row">
+    
+<div class="col-6 offset-3">   
+            <h1 class="text-center">Enter new CS Package for:</h1>
+            <br>
+
+            <h2 class="text-center"> <%= product.name%> <br>Procurement Plan </h2>
+
+    <form action="/products/<%=product._id%>/consultants" method="POST" novalidate class = "validated-form">
+
+    <div class="row">  
+                
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="number">Package Number</label>
+                        <input class="form-control" type="text" id="number" name="number" required>
+                </div>
+                
+                
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="description">Package Description</label>
+                        <input class="form-control" type="text" id="description" name="description" required>
+                </div>
+            
+                
+                    <div class="mb-3 mt-3">
+                    <label class="form-label" for="value">Package Value</label>
+                    <input class="form-control" type="text" id="value" name="value" required>
+                </div> 
+
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="method" class="form-label">Procurement Method</label>
+                    <input class="form-control" list="csmethodlist" id="method" name="method" required>
+                    <datalist id="csmethodlist">
+                            <option value="OCBS (FTP)">
+                            <option value="OCBS (STP)">
+                            <option value="OCBS (LCS)">
+                            <option value="CQS limited">
+                            <option value="ICS">
+                            <option value="Direct Contracting">
+                            <option value="Other">
+                    </datalist>
+                </div>  
+               
+    </div>
+
+    <div class="row">  
+               
+              
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="sbd" class="form-label">Standard Bid Document</label>
+            <input class="form-control" list="sbdlist" id="sbd" name="sbd" required>
+            <datalist id="sbdlist">
+            <option value="Expression of Interest">
+            <option value="Standard Request for Proposal (ADB)"></option>
+            </datalist>
+        </div>  
+        
+                
+                
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="review">ADB Review</label>
+                    <input class="form-control" type="text" id="review" name="review" required>
+                </div>  
+               
+              
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="procedure">Procedure</label>
+                    <input class="form-control" type="text" id="procedure" name="procedure">
+                </div>  
+                
+    </div>  
+
+    <div class="row">  
+              
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="advertising">Advertising</label>
+                    <input class="form-control" type="text" id="advertising" name="advertising">
+                </div> 
+                
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="approach">Approach (market)</label>
+                    <input class="form-control" type="text" id="approach" name="approach">
+                </div> 
+               
+                
+    </div> 
+    
+
+    <button class="btn btn-primary">Add Package</button>
+
+    </form>
+<br>
+</div>
+</div>
+ 
+       

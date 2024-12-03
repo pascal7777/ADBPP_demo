@@ -1,0 +1,298 @@
+<% layout('layouts/boilerplate')%>
+    
+<div class="row">
+
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                
+            <h2 style="font-size: 2em"> 
+            <a href="/products/<%=consultant.product._id%>"><%=consultant.product.name%></a><br>Package: <%=consultant.number%> - <%=consultant.description%></h2>
+          
+            <div class="row">
+            <div class="col-sm-4" style=" line-height:1.0">
+                        <span style="color:rgb(119, 119, 121); font-size: 0.8em"> Submitted by: <%= consultant.author.username%>
+                        <br><em>On: <%= consultant.createdAt.toDateString()%></em>
+                        <% if( (consultant.createdAt - Date.now())/604800000 <= -1)      {%>
+                            (<%= - Math.floor( (consultant.createdAt - Date.now())/1209600000)%> week(s) ago)
+                            <% } %> 
+                        </span>
+            </div>
+            <div class="col-sm-4" style=" line-height:1.0">   
+                        <% if(consultant.createdAt.toDateString() != consultant.updatedAt.toDateString()) {%>
+                        <span style="color:rgb(119, 119, 121); font-size: 0.8em"> Edited by:
+                        <%= consultant.editor.username%>
+                        <br><em><%= consultant.updatedAt.toDateString()%></em>
+                        <% if( (consultant.updatedAt - Date.now())/604800000 <= -1)      {%>
+                            (<%= - Math.floor( (consultant.updatedAt - Date.now())/1209600000)%> week(s) ago)
+                             <% } %>  
+                        </span>
+                        <% } %>
+            </div>
+        
+            <div class="col-sm-4" style=" line-height:1.0">   
+               
+                 <span style="color:rgb(119, 119, 121); font-size: 1.5em"> 
+                    Status:<% if(consultant.status==="Scheduled" ) {%>
+                         <span style="color:rgb(8, 96, 249)">
+                             <%=consultant.status %>
+                         </span>
+                         <% } %>
+                             <% if(consultant.status==="Advertised" ) {%>
+                                 <span style="color:rgb(6, 240, 45)">
+                                     <%=consultant.status %>
+                                 </span>
+                                 <% } %>
+ 
+                                 <% if(consultant.status==="Evaluation" ) {%>
+                                     <span style="color:rgb(246, 187, 11)">
+                                         <%=consultant.status %>
+                                     </span>
+                                     <% } %>
+ 
+                                     <% if(consultant.status==="Awarded" ) {%>
+                                         <span style="color:rgba(3, 107, 14, 0.704)">
+                                             <%=consultant.status %>
+                                         </span>
+                                         <% } %>
+ 
+                                             <% if(consultant.status==="Cancelled" ) {%>
+                                                 <span style="color:rgb(250, 112, 7)">
+                                                     <%=consultant.status %>
+                                                 </span>
+                                                 <% } %>
+                                                    </span>
+            </div> 
+            <% if(consultant.status==="Evaluation" | consultant.status==="Advertised" | consultant.status==="Scheduled" ) {%>
+            
+            <div class="col-sm-6" style=" line-height:1.0">  
+            <p class="mt-3"><a class="btn btn-warning btn-sm" style="padding-left: 15px; padding-right: 15px ;" href="/consultants/<%=consultant._id%>/status" role="button">Change Status</a></p>
+            </div> 
+            <% } %>
+    </div>  
+        </div> 
+            </div> 
+
+
+
+<br>
+
+<div class="row">
+    
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+            <div class="row">
+            <div class="col-sm-12">
+                <h5 style="font-size: 1em">Value US$ (estimated)</h5>
+                            <ul>
+                            <li><bold><%= consultant.value.toLocaleString(undefined, { minimumFractionDigits: 0 })%></bold>
+                            </li>
+                            </ul>
+                <h5 style="font-size: 1em">Method</h5>
+                            <ul>
+                            <li><bold><%= consultant.method%></bold>
+                            </li>
+                            </ul>
+                <h5 style="font-size: 1em">Advertising</h5>
+                            <ul>
+                            <li><bold><%= consultant.advertising%></bold>
+                            </li>
+                            </ul>
+                <h5 style="font-size: 1em">Approach</h5>
+                            <ul>
+                            <li><bold><%= consultant.approach%></bold>
+                            </li>
+                            </ul>
+            
+                <h5 style="font-size: 1em">Standard Bid Document</h5>
+                                <ul>
+                                <li><bold><%= consultant.sbd%></bold>
+                                </li>
+                                </ul> 
+                <h5 style="font-size: 1em">Procedure</h5>
+                                <ul>
+                                <li><bold><%= consultant.procedure%></bold>
+                                </li>
+                                </ul>
+                <h5 style="font-size: 1em">ADB Review</h5>
+                                <ul>
+                                <li><bold><%= consultant.review%></bold>
+                                </li>
+                                </ul>
+
+
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-6">
+    <div class="card">
+    <div class="card-body">
+        
+    <br>
+                    <% if(consultant.status==="Advertised") {%>
+                        <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            Advertising details
+                            </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul>
+                                    <% if(consultant.advertised!=null) {%>
+                                    <li>BD Advertised/issued on:  <%=consultant.advertised.toDateString()%>
+                                    </li>
+                                    <li>Bid Submission Deadline on:  <%=consultant.deadline.toDateString()%>
+                                    </li>
+                                    <% } %> 
+                                </ul>  
+                                <span style="color:rgb(119, 119, 121); font-size: 1em"> <em>Nr days = <%=((consultant.deadline - consultant.advertised) / (1000 * 60 * 60 * 24))%></em></span>
+                            <p><a href="/consultants/<%=consultant._id%>/advertising">Edit</a></p>
+                               
+                        </div>
+                        </div>
+                        </div>  
+                        </div>
+                    <% } %> 
+          
+
+    <br>
+
+   
+                <% if(consultant.status==="Awarded") {%>
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Contract Details 
+                    </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                    <ul>   
+                        <span style="color:rgb(0, 1, 4); font-size: 1em"> Contract 1</span>
+                        
+                        <span style="color:rgb(119, 119, 121); font-size: 1em"> 
+                            <% if( (consultant.contractDate - Date.now())/604800000 <= -1) {%>
+                                        <li> 
+                                        Signed: <%=consultant.contractDate.toDateString() %>
+                                        </li>
+                                <% } %> 
+                            
+                            <% if(consultant.contractName!=null) {%>
+                                        <li> 
+                                        Name: <%=consultant.contractName%>
+                                        </li>
+                                <% } %> 
+
+                            <% if(consultant.contractType!=null) {%>
+                                        <li> 
+                                        Type: <%=consultant.contractType%>
+                                        </li>
+                                <% } %> 
+
+                            <% if(consultant.contractSum!=null) {%>
+                                        <li> 
+                                        Sum: US$: <%=consultant.contractSum.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                        </li>
+                                <% } %> 
+                            </span>
+                                </ul>   
+                  
+                    <% } %> 
+              
+
+                        <br>
+
+                     
+                        <em>variance: US$ <%=(consultant.value - consultant.contractSum).toLocaleString(undefined, { minimumFractionDigits: 0 })%></em></span>
+                        <p><a href="/consultants/<%=consultant._id%>/contractSum">Edit</a></p>
+               
+
+</div> 
+</div> 
+
+
+    <div class="col-sm-6">
+    <br>
+            <span style="color:rgb(162, 164, 165)">
+            <% if(consultant.status === "Scheduled") {%>
+            <div class="row">
+                <div class="col-6">
+            <p> <a class="btn btn-sm btn-warning" href="/consultants/<%=consultant._id%>/edit">Edit</a></p>
+                </div>
+                <div class="col-6">
+            <form action="/consultants/<%=consultant._id%>?_method=DELETE" method="POST">
+            <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+                </div>
+            </div>
+            <% } %>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+
+    <% if(consultant.status==="Evaluation") {%>  
+    <div class="col-12">
+            <h5 style="font-size: 1em">Evaluation notes</h5>
+            <form action="/consultants/<%=consultant._id%>/checks" method="POST" class="mb-3 validated-form" novalidate>
+                <div class="mb-3">
+                </div>
+                <div class="mb-3">
+                  
+                    <textarea class="form-control" name="check[body]" id="body" cols="30" rows="4" required></textarea>
+                
+                </div>
+                <button class="btn btn-sm btn-success ">Submit</button>
+            </form>
+            <% for(let check of consultant.checks) { %>
+            <div class="card mb-3 ">
+                <div class="card-body">
+                    <p class="card-text"><%= check.body %> </p>
+                    <p><em><span style="color:rgb(33, 32, 32); font-size: 0.8em" ">Author: <%= check.author.username %> at <%= check.createdAt.toDateString() %></span></em></p>
+                    <form action="/consultants/<%=consultant._id%>/checks/<%=check._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <% } %>
+    </div>
+    <% } %>
+
+
+    <% if(consultant.status=== "Awarded") {%>
+    <div class="col-12">
+        <h5 style="font-size: 1em">Contract Comments</h5>
+        <form action="/consultants/<%=consultant._id%>/comments" method="POST" class="mb-3 validated-form" novalidate>
+            <div class="mb-3">
+              
+                <textarea class="form-control" name="comment[body]" id="body" cols="30" rows="4" required></textarea>
+            
+            </div>
+            <button class="btn btn-sm btn-success">Submit</button>
+        </form>
+        <% for(let comment of consultant.comments) { %>
+        <div class="card mb-3 ">
+            <div class="card-body">
+                <p class="card-text">Comment: <%= comment.body %></p>
+                <p><em><span style="color:rgb(33, 32, 32);  font-size: 0.8em">Author: <%= comment.author.username %> at <%= comment.createdAt.toDateString() %></span></em></p>
+                <form action="/consultants/<%=consultant._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <% } %>
+
+</div>

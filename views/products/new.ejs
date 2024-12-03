@@ -1,0 +1,158 @@
+<% layout('layouts/boilerplate')%>
+ 
+
+<div class="row">
+
+    <div class="col-8 offset-3">
+
+    <h1 class="text-center">Add a Procurement Plan</h1>
+    <br>
+        <form action="/products" method="POST" novalidate class = "validated-form">
+   
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="name">Project Name</label>
+                <input class="form-control" type="text" id="name" name="product[name]" required>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="number">Project Number</label>
+                <input class="form-control"  type="text" id="number" name="product[number]">
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="approvalNumber">Project Approval Number</label>
+                <input class="form-control"  type="text" id="approvalNumber" name="product[approvalNumber]">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="country" class="form-label">Country</label>
+                <input class="form-control" list="countries"name="product[country]" id="country" placeholder="Type to search..."
+                    required>
+                <datalist id="countries">
+                    <option value="Afghanistan">
+                        <option value="Armenia">
+                        <option value="Australia">
+                        <option value="Austria">
+                        <option value="Azerbaijan">
+                        <option value="Bangladesh">
+                        <option value="Belgium">
+                        <option value="Bhutan">
+                        <option value="Brunei">
+                        <option value="Cambodia">
+                        <option value="Canada">
+                        <option value="China, PRC">
+                        <option value="Cook Islands">
+                        <option value="Darussalam">
+                        <option value="Denmark">
+                        <option value="Fiji">
+                        <option value="Finland">
+                        <option value="France">
+                        <option value="Georgia">
+                        <option value="Germany">
+                        <option value="Hong Kong">
+                        <option value="India">
+                        <option value="Indonesia">
+                        <option value="Ireland">
+                        <option value="Italy">
+                        <option value="Japan">
+                        <option value="Kazakhstan">
+                        <option value="Kiribati">
+                        <option value="Korea">
+                        <option value="Kyrgyz Republic">
+                        <option value="Lao PDR">
+                        <option value="Luxembourg">
+                        <option value="Malaysia">
+                        <option value="Maldives">
+                        <option value="Marshall">
+                        <option value="Micronesia">
+                        <option value="Mongolia">
+                        <option value="Myanmar">
+                        <option value="Nauru">
+                        <option value="Nepal">
+                        <option value="Netherlands">
+                        <option value="New Zealand">
+                        <option value="Niue">
+                        <option value="Norway">
+                        <option value="Pakistan">
+                        <option value="Palau">
+                        <option value="Papua New Guinea">
+                        <option value="Philippines">
+                        <option value="Portugal">
+                        <option value="Samoa">
+                        <option value="Singapore">
+                        <option value="Solomon">
+                        <option value="Spain">
+                        <option value="Sri Lanka">
+                        <option value="Sweden">
+                        <option value="Switzerland">
+                        <option value="Taipei, China">
+                        <option value="Tajikistan">
+                        <option value="Thailand">
+                        <option value="Timor-Leste">
+                        <option value="Tonga">
+                        <option value="Turkey">
+                        <option value="Turkmenistan">
+                        <option value="Tuvalu">
+                        <option value="Uzbekistan">
+                        <option value="Vanuatu">
+                        <option value="VietNam">
+                </datalist>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="agency">Implementing Agency</label>
+                <input class="form-control"  type="text" id="agency" name="product[agency]">
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="financing">Project Financing (Million $US)</label>
+                <input class="form-control"  type="decimal" id="financing" name="product[financing]">
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="risk">Procurement Risk</label>
+                <div style="font-size: 12px"><span style="color:rgb(119, 119, 121)">Copy from the Strategic Procurement Plan Section 7 Summary</div>
+                <input class="form-control"  type="text" id="risk" name="product[risk]">
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="planValue">Procurement Plan Value (Million $US)</label>
+                <input class="form-control" type="decimal" id="planValue" name="product[planValue]">
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="methods">Procurement Methods (Goods, Works, NCS)</label>
+                <div style="font-size: 12px"><span style="color:rgb(119, 119, 121)">Describe methods used for Goods, Works and nonconsulting services</div>
+                <textarea class="form-control" id="methods" name="product[methods]" rows="4"></textarea>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="methodsCS">Procurement Methods (Consultancies)</label>
+                <div style="font-size: 12px"><span style="color:rgb(119, 119, 121)">Describe methods used for Consulting Services</div>
+                <textarea class="form-control" id="methodsCS" name="product[methodsCS]" rows="4"></textarea>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="effective">Project Effective Date</label>
+                <input class="form-control" type="date" id="effective" name="product[effective]" required >
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="closing">Project Closing Date</label>
+                <input class="form-control" type="date" id="closing" name="product[closing]" required >
+            </div>
+
+            <!-- <div class="mb-3 mt-3">
+                <label class="form-label" for="comments">Comments</label>
+                <textarea class="form-control" id="comments" name="product[comments]" rows="4"></textarea>
+            </div> -->
+
+            <br>
+            <button class="btn btn-success" >Add Plan</button>
+        </form>
+        <br>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,131 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container mt-3">
+    
+   
+         <form action="/expressions/<%=expression._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+
+            <% if(expression.lots===1) {%>
+                <div class="row">  
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                            <label class="form-label" for="lot1q">Lot 1 Description</label>
+                            <input class="form-control" type="text" id="lot1q" name="expression[lot1q]" value="<%=expression.lot1q%>">
+                    </div>
+                </div>
+    
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="lot1v">Lot 1 estimated value (US$)</label>
+                        <input class="form-control" type="number" id="lot1v" name="expression[lot1v]" value="<%=expression.lot1v%>">
+                    </div>
+                </div>
+            </div>
+           
+            <% } %> 
+                
+
+            <% if(expression.lots===2) {%>
+                <div class="row">  
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                            <label class="form-label" for="lot1q">Lot 1 Description</label>
+                            <input class="form-control" type="text" id="lot1q" name="expression[lot1q]" value="<%=expression.lot1q%>">
+                    </div>
+                </div>
+    
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="lot1v">Lot 1 estimated value (US$)</label>
+                        <input class="form-control" type="number" id="lot1v" name="expression[lot1v]" value="<%=expression.lot1v%>">
+                    </div>
+                </div>
+            </div>
+            <div class="row">  
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                            <label class="form-label" for="lot2q">Lot 2 Description</label>
+                            <input class="form-control" type="text" id="lot2q" name="expression[lot2q]" value="<%=expression.lot2q%>">
+                    </div>
+                </div>
+    
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="lot2v">Lot 2 estimated value (US$)</label>
+                        <input class="form-control" type="number" id="lot2v" name="expression[lot2v]" value="<%=expression.lot2v%>">
+                    </div>
+                </div>
+            </div>
+       
+            <% } %> 
+                
+
+            <% if(expression.lots===3) {%>
+            <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="lot1q">Lot 1 Description</label>
+                        <input class="form-control" type="text" id="lot1q" name="expression[lot1q]" value="<%=expression.lot1q%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="lot1v">Lot 1 estimated value (US$)</label>
+                    <input class="form-control" type="number" id="lot1v" name="expression[lot1v]" value="<%=expression.lot1v%>">
+                </div>
+            </div>
+        </div>
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="lot2q">Lot 2 Description</label>
+                        <input class="form-control" type="text" id="lot2q" name="expression[lot2q]" value="<%=expression.lot2q%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="lot2v">Lot 2 estimated value (US$)</label>
+                    <input class="form-control" type="number" id="lot2v" name="expression[lot2v]" value="<%=expression.lot2v%>">
+                </div>
+            </div>
+        </div>
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="lot3q">Lot 3 Description</label>
+                        <input class="form-control" type="text" id="lot3q" name="expression[lot3q]" value="<%=expression.lot3q%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="lot3v">Lot 3 estimated value (US$)</label>
+                    <input class="form-control" type="number" id="lot3v" name="expression[lot3v]" value="<%=expression.lot3v%>">
+                </div>
+            </div>
+        </div>
+        <% } %> 
+            
+                        
+
+                          
+                     
+          
+          
+           
+
+       
+
+
+        
+            <div class="mb-3">
+                <button class=" btn btn-warning btn-sm">Confirm</button>
+            </div>
+              
+    </form>
+
+</div>
+  
+  

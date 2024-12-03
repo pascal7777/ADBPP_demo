@@ -1,0 +1,87 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container mt-3">
+    <h1>Status Change</h1>
+       
+        <br>
+        <h3>
+            Package: <%=expression.product.name%> - <%=expression.number%> 
+        </h3>
+
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card shadow">
+                <div class="card-body">
+
+                    <form action="/expressions/<%=expression._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+                        <br>
+                                <div class="mb-3">
+                                    <label class="form-label" for="status" class="form-label">Update Package Status from 
+                        
+                                        <% if(expression.status==="Scheduled" ) {%>
+                                            <span style="color:rgb(48, 8, 249)">
+                                                <%=expression.status %>
+                                            </span>
+                                            <% } %>
+                                        
+                                            <% if(expression.status==="Advertised" ) {%>
+                                                <span style="color:rgb(3, 99, 10)">
+                                                    <%=expression.status %>
+                                                </span>
+                                                <% } %>
+            
+                                                    <% if(expression.status==="Evaluation" ) {%>
+                                                        <span style="color:rgb(6, 240, 18)">
+                                                            <%=expression.status %>
+                                                        </span>
+                                                        <% } %>
+            
+                                                        <% if(expression.status==="Awarded" ) {%>
+                                                            <span style="color:rgb(3, 39, 5)">
+                                                                <%=expression.status %>
+                                                            </span>
+                                                            <p>Before to change status to 'Awarded)' enter the contract value using Edit</p>
+                                                            <% } %>
+            
+                                                            <% if(expression.status==="Cancelled" ) {%>
+                                                                <span style="color:rgb(251, 16, 16)">
+                                                                    <%=expression.status %>
+                                                                </span>
+                                                                <% } %>
+            
+                                                            
+                                                                            to:
+                                    </label>
+                                    <input class="form-control" list="changestatus" name="expression[status]" id="status" required>
+                                    <datalist id="changestatus">
+                                        <option value="Advertised">
+                                            <option value="Evaluation">
+                                                    <option value="Awarded">
+                                                        <option value="Cancelled">
+                                    </datalist>
+                            </div>
+
+                                <br>
+
+                        
+
+                        <br>
+                        <br>
+
+                        <div>
+                        <button class=" btn btn-warning btn-sm">Confirm Status Change</button>
+                        </div>
+                    </form>
+
+
+                </div>   
+            </div>
+        
+        
+            <div>
+                <br>
+                <a class="btn btn-primary btn-sm" href="/expressions/<%=expression._id%>" role="button">Go Back</a></div>
+        </div>
+    </div>
+</div>
+  

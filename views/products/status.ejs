@@ -1,0 +1,79 @@
+<% layout('layouts/boilerplate')%>
+
+    <div class="container mt-3">
+        <h1>Status Change</h1>
+       
+        <br>
+        <h3>
+            Plan: <%=product.number%> - <%=product.name%>
+                <br>Source: <%=product.agency%> - <%=product.country%>
+        </h3>
+
+
+      
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card shadow">
+                    <div class="card-body">
+
+
+     <form action="/products/<%=product._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+            <br>
+    
+            <label for="status">
+                <h4>Update Plan Status from 
+
+            <% if(product.status==="DRAFT") {%>
+                <span style="color:rgb(48, 8, 249)">
+                    <%=product.status %>
+                </span>
+                    <% } %>
+                    
+                <% if(product.status==="SUBMITTED" ) {%>
+                    <span style="color:rgb(48, 8, 249)">
+                        <%=product.status %>
+                    </span>
+                    <% } %>
+                   
+                    <% if(product.status==="RETURNED" ) {%>
+                        <span style="color:rgb(213, 154, 4)">
+                            <%=product.status %>
+                        </span>
+                        <% } %>
+
+                            <% if(product.status==="APPROVED" ) {%>
+                                <span style="color:rgb(2, 48, 13)">
+                                    <%=product.status %>
+                                </span>
+                                <% } %>
+
+                                <% if(product.status==="REVISION" ) {%>
+                                    <span style="color:rgb(2, 48, 13)">
+                                        <%=product.status %>
+                                    </span>
+                                    <% } %>
+
+                to:</h4>
+            </label>
+            <hr>
+            <h5><select name="product[status]" id="status">
+                    <option value="">--Select--</option>
+                    <option value="SUBMITTED">SUBMITTED TO ADB FOR NOL</option>
+                    <option value="RETURNED">RETURNED TO EA (to ADDRESS ADB COMMENTS)</option>
+                    <option value="APPROVED">No OBJECTION (APPROVED by ADB)</option>
+                    <option value="REVISION">UNDER REVISION BY EA</option>
+            </select></h5>
+            <br>
+
+           
+            <br>
+            <br>
+            <div>
+                <button class=" btn btn-warning btn-sm">Confirm Status Change</button>
+            </div>
+        </form>
+
+
+    </div>   </div>   </div>   </div>
+    </div>
+  

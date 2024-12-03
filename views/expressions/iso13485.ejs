@@ -1,0 +1,72 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container mt-3">
+    <h1>Update ISO13485 Details</h1>
+    
+    <br>
+
+    <h3>
+            Manufacturer: <%=expression.manufacturer%> -  <%=expression.mfCountry%> 
+    </h3>
+    
+    <br>
+   
+    <form action="/expressions/<%=expression._id%>?_method=PUT" method="POST" novalidate class = "validated-form" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                                <label class="form-label" for="number13485">Certificate Nr. <br>[<span style="color:rgb(8, 96, 249)"><%=expression.number13485%></span>]</label>
+                                <input class="form-control" type="text" name="expression[number13485]" id="number13485">
+                            <p style="margin-top: 0; color: rgb(0, 34, 255);font-size: 0.8em;"><em>optional</em></p>
+                        </div>
+
+            <div class="mb-3">
+                                <label class="form-label" for="body13485">Certifying Body <br>[<span style="color:rgb(8, 96, 249)"><%=expression.body13485%></span>]</label>
+                                <input class="form-control" type="text" name="expression[body13485]" id="body13485 ">
+                            <p style="margin-top: 0; color: rgb(0, 34, 255);font-size: 0.8em;"><em>optional</em></p>
+                        </div>  
+
+            <div class="mb-3">
+                            <label class="form-label" for="iaf13485" class="form-label">Certifiying Body GHTF <br>[<span style="color:rgb(8, 96, 249)"><%=expression.iaf13485%></span>]</label>
+                            <input class="form-control" list="yesno13485" name="expression[iaf13485]" id="iaf13485">
+                            <datalist id="yesno13485">
+                                    <option value="Yes">
+                                    <option value="No">
+                                    <option value="NA">
+                            </datalist>
+                            <p style="margin-top: 0; color: rgb(0, 34, 255);font-size: 0.8em;"><em>optional</em></p>
+            </div>
+              
+
+
+
+            <div class="mb-3">
+                                    <label class="form-label" for="iso13485validTo">'Valid to' date <br>[<span style="color:rgb(8, 96, 249)"><%=expression.iso13485validTo.toDateString()%>]</span></label>
+                                    <input class="form-control" type="date" name="expression[iso13485validTo]" id="iso13485validTo" required>
+                            <p style="margin-top: 0; color: red;font-size: 0.8em;"><em>required</em></p>
+                        </div>
+            
+            <div class="mb-3">
+                                <label class="form-label" for="iso13485onLine" class="form-label">Certificate Verified online <br>[<span style="color:rgb(8, 96, 249)"><%=expression.iso13485onLine%></span>]</label>
+                                <input class="form-control" list="yesno2" name="expression[iso13485onLine]" id="iso13485onLine">
+                                <datalist id="yesno2">
+                                    <option value="Yes, successfull">
+                                    <option value="No, not successfull">
+                                    <option value="Online check not available">
+                                    <option value="Not verified (yet)">
+                                </datalist>
+                            <p style="margin-top: 0; color: rgb(0, 34, 255);font-size: 0.8em;"><em>optional</em></p>
+                        </div>
+
+          
+                        <div class="mt-4">
+                            <a class="btn btn-primary btn-sm" href="/expressions/<%=expression._id%>" role="button">Go Back</a>
+                        </div>
+                <br> 
+                        <div class="mb-3">
+                            <button class=" btn btn-warning btn-sm">Confirm changes</button>
+                        </div>  
+    </form>
+
+    </div>
+  
+  

@@ -1,0 +1,597 @@
+<% layout('layouts/boilerplate')%>
+    
+<div class="row">
+
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                
+            <h2 style="font-size: 2em"> 
+            <a href="/products/<%=expression.product._id%>"><%=expression.product.name%></a><br>Package: <%=expression.number%> [<%=expression.description%>]</h2>
+          
+            <div class="row">
+            <div class="col-sm-4" style=" line-height:1.0">
+                        <span style="color:rgb(119, 119, 121); font-size: 0.8em"> Submitted by: <%= expression.author.username%>
+                        <br><em>On: <%= expression.createdAt.toDateString()%></em>
+                        <% if( (expression.createdAt - Date.now())/604800000 <= -1)      {%>
+                            (<%= - Math.floor( (expression.createdAt - Date.now())/1209600000)%> week(s) ago)
+                            <% } %> 
+                        </span>
+            </div>
+            <div class="col-sm-4" style=" line-height:1.0">   
+                        <% if(expression.createdAt.toDateString() != expression.updatedAt.toDateString()) {%>
+                        <span style="color:rgb(119, 119, 121); font-size: 0.8em"> Edited by:
+                        <%= expression.editor.username%>
+                        <br><em><%= expression.updatedAt.toDateString()%></em>
+                        <% if( (expression.updatedAt - Date.now())/604800000 <= -1)      {%>
+                            (<%= - Math.floor( (expression.updatedAt - Date.now())/1209600000)%> week(s) ago)
+                             <% } %>  
+                        </span>
+                        <% } %>
+            </div>
+        
+            <div class="col-sm-4" style=" line-height:1.0">   
+               
+                 <span style="color:rgb(119, 119, 121); font-size: 1.5em"> 
+                    Status:<% if(expression.status==="Scheduled" ) {%>
+                         <span style="color:rgb(8, 96, 249)">
+                             <%=expression.status %>
+                         </span>
+                         <% } %>
+                             <% if(expression.status==="Advertised" ) {%>
+                                 <span style="color:rgb(6, 240, 45)">
+                                     <%=expression.status %>
+                                 </span>
+                                 <% } %>
+ 
+                                 <% if(expression.status==="Evaluation" ) {%>
+                                     <span style="color:rgb(246, 187, 11)">
+                                         <%=expression.status %>
+                                     </span>
+                                     <% } %>
+ 
+                                     <% if(expression.status==="Awarded" ) {%>
+                                         <span style="color:rgba(3, 107, 14, 0.704)">
+                                             <%=expression.status %>
+                                         </span>
+                                         <% } %>
+ 
+                                             <% if(expression.status==="Cancelled" ) {%>
+                                                 <span style="color:rgb(250, 112, 7)">
+                                                     <%=expression.status %>
+                                                 </span>
+                                                 <% } %>
+                                                    </span>
+            </div> 
+            <% if(expression.status==="Evaluation" | expression.status==="Advertised" | expression.status==="Scheduled" ) {%>
+            
+            <div class="col-sm-6" style=" line-height:1.0">  
+            <p class="mt-3"><a class="btn btn-warning btn-sm" style="padding-left: 15px; padding-right: 15px ;" href="/expressions/<%=expression._id%>/status" role="button">Change Status</a></p>
+            </div> 
+            <% } %>
+    </div>  
+        </div> 
+            </div> 
+
+
+
+<br>
+
+<div class="row">
+    
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+            <div class="row">
+            <div class="col-sm-12">
+                <h5 style="font-size: 1em">Value US$ (estimated)</h5>
+                            <ul>
+                            <li><bold><%= expression.value.toLocaleString(undefined, { minimumFractionDigits: 0 })%></bold>
+                            </li>
+                            </ul>
+                <h5 style="font-size: 1em">Method</h5>
+                            <ul>
+                            <li><bold><%= expression.method%></bold>
+                            </li>
+                            </ul>
+                <h5 style="font-size: 1em">Advertising</h5>
+                            <ul>
+                            <li><bold><%= expression.advertisingQ%> <%= expression.advertisingY%></bold>
+                            </li>
+                            </ul>
+                <h5 style="font-size: 1em">Approach</h5>
+                            <ul>
+                            <li><bold><%= expression.approach%></bold>
+                            </li>
+                            </ul>
+                <% if(expression.approach==="International") {%>
+                <h5 style="font-size: 1em">Domestic Preference</h5>
+                            <ul>
+                            <li><bold><%= expression.domesticPreference%></bold>
+                            </li>
+                            </ul>
+                            <% } %>
+                <% if(expression.method==="OCB limited") {%>
+                <h5 style="font-size: 1em">Pre-qualification</h5>
+                            <ul>
+                                <li><bold><%= expression.prequal%></bold>
+                                </li>
+                            </ul>
+                            <% } %>
+                <h5 style="font-size: 1em">Standard Bid Document</h5>
+                            <ul>
+                                <li><bold><%= expression.sbd%></bold>
+                                </li>
+                            </ul> 
+                <% if(expression.procedure!="") {%>
+                <h5 style="font-size: 1em">Procedure</h5>
+                            <ul>
+                                <li><bold><%= expression.procedure%></bold>
+                                </li>
+                            </ul>
+                            <% } %>
+                <h5 style="font-size: 1em">ADB Review</h5>
+                            <ul>
+                                <li><bold><%= expression.review%></bold>
+                                </li>
+                            </ul>
+
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-6">
+    <div class="card">
+        <div class="card-body">
+            
+            <div class="row">   
+            <div class="col-sm-12">
+             
+                <% if(expression.lots===1) {%>
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <%  if( expression.lots.length===0)  {%>
+                            <% } else{ %> 
+                                Package Details (<%=expression.lots%> lots)    
+                            <% } %> 
+                        </button>
+                        </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                                <% if(expression.lot1q!=null) {%>
+                                    <li> 
+                                    Lot 1: <%=expression.lot1q%>;    
+                                    estimated value: US$ <%=expression.lot1v.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    </li>
+                                    <% } %> 
+                                <br>
+                                <span style="color:rgb(119, 119, 121); font-size: 1em"><em>TotalValue = US$ <%=(expression.lot1v + expression.lot2v + expression.lot3v).toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                               (variance = US$ <%=(expression.lot1v + expression.lot2v + expression.lot3v - expression.value)%>)</em></span>
+                                </ul>  
+                                    <p><a href="/expressions/<%=expression._id%>/subLots">Edit</a></p>
+                
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <% } %> 
+
+                <% if(expression.lots===2) {%>
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                           
+                        <%  if( expression.lots.length===0)  {%>
+                            <% } else{ %> 
+                                Package Details (<%=expression.lots%> lots)   
+                        <% } %> 
+                        
+                        </button>
+                        </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                                <% if(expression.lot1q!=null) {%>
+                                    <li> 
+                                    Lot 1: <%=expression.lot1q%>;    
+                                    estimated value: US$ <%=expression.lot1v.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    </li>
+                                    <% } %> 
+                              
+                                    <% if(expression.lot2q!=null) {%>
+                                    <li> 
+                                    Lot 2: <%=expression.lot2q%>;
+                                    estimated value: US$ <%=expression.lot2v.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    </li>
+                                    <% } %> 
+                              
+                                <br>
+                                <span style="color:rgb(119, 119, 121); font-size: 1em"><em>TotalValue = US$ <%=(expression.lot1v + expression.lot2v + expression.lot3v).toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                               (variance = US$ <%=(expression.lot1v + expression.lot2v + expression.lot3v - expression.value)%>)</em></span>
+                                </ul>  
+                                    <p><a href="/expressions/<%=expression._id%>/subLots">Edit</a></p>
+                
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <% } %> 
+
+                <% if(expression.lots===3) {%>
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <%  if( expression.lots.length===0)  {%>
+                                <% } else{ %> 
+                                          Package Details (<%=expression.lots%> lots)
+                                <% } %> 
+                        </button>
+                        </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                                <% if(expression.lot1q!=null) {%>
+                                    <li> 
+                                    Lot 1: <%=expression.lot1q%>;    
+                                    estimated value: US$ <%=expression.lot1v.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    </li>
+                                    <% } %> 
+                              
+                                    <% if(expression.lot2q!=null) {%>
+                                    <li> 
+                                    Lot 2: <%=expression.lot2q%>;
+                                    estimated value: US$ <%=expression.lot2v.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    </li>
+                                    <% } %> 
+                                        
+                                    <% if(expression.lot3q!=null) {%>
+                                        <li>
+                                    Lot 3: <%=expression.lot3q%>;
+                                    estimated value: US$ <%=expression.lot3v.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                    </li>
+                                    <% } %> 
+                                <br>
+                                <span style="color:rgb(119, 119, 121); font-size: 1em"><em>TotalValue = US$ <%=(expression.lot1v + expression.lot2v + expression.lot3v).toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                               (variance = US$ <%=(expression.lot1v + expression.lot2v + expression.lot3v - expression.value)%>)</em></span>
+                                </ul>  
+                                    <p><a href="/expressions/<%=expression._id%>/subLots">Edit</a></p>
+                
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <% } %> 
+            </div>
+        </div>  
+        
+   
+    <br>
+                    <% if(expression.status==="Advertised") {%>
+                        <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            Advertising details
+                            </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul>
+                                    <% if(expression.advertised!=null) {%>
+                                    <li>BD Advertised/issued on:  <%=expression.advertised.toDateString()%>
+                                    </li>
+                                    <li>Bid Submission Deadline on:  <%=expression.deadline.toDateString()%>
+                                    </li>
+                                    <% } %> 
+                                </ul>  
+                                <span style="color:rgb(119, 119, 121); font-size: 1em"> <em>Nr days = <%=((expression.deadline - expression.advertised) / (1000 * 60 * 60 * 24))%></em></span>
+                            <p><a href="/expressions/<%=expression._id%>/advertising">Edit</a></p>
+                               
+                        </div>
+                        </div>
+                        </div>  
+                        </div>
+                    <% } %> 
+          
+
+    <br>
+
+   
+                <% if(expression.status==="Awarded") {%>
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                    <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Contract Details 
+                    </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                    <% if(expression.lots=== 1) {%>
+                    <ul>   
+                        <span style="color:rgb(0, 1, 4); font-size: 1em"> Contract 1</span>
+                        
+                        <span style="color:rgb(119, 119, 121); font-size: 1em"> 
+                            <% if( (expression.contractDate - Date.now())/604800000 <= -1)      {%>
+                                        <li> 
+                                        Signed: <%=expression.contractDate.toDateString() %>
+                                        </li>
+                                <% } %> 
+                            
+                                <% if(expression.contractName!=null) {%>
+                                        <li> 
+                                        Name: <%=expression.contractName%>
+                                        </li>
+                                <% } %> 
+
+                                <% if(expression.contractType!=null) {%>
+                                        <li> 
+                                        Type: <%=expression.contractType%>
+                                        </li>
+                                <% } %> 
+
+                                <% if(expression.contractSum!=null) {%>
+                                        <li> 
+                                        Sum: US$ <%=expression.contractSum.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                        </li>
+                                <% } %> 
+                            </span>
+                                </ul>   
+                    <% } %> 
+
+                    <% if(expression.lots=== 2) {%>    
+                        <ul>   
+                            <span style="color:rgb(0, 1, 4); font-size: 1em"> Contract 1</span>
+                            
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"> 
+                                <% if( (expression.contractDate - Date.now())/604800000 <= -1)      {%>
+                                            <li> 
+                                            Signed: <%=expression.contractDate.toDateString() %>
+                                            </li>
+                                    <% } %> 
+                                
+                                    <% if(expression.contractName!=null) {%>
+                                            <li> 
+                                            Name: <%=expression.contractName%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractType!=null) {%>
+                                            <li> 
+                                            Type: <%=expression.contractType%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractSum!=null) {%>
+                                            <li> 
+                                            Sum: US$ <%=expression.contractSum.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                            </li>
+                                    <% } %> 
+                                </span>
+                                </ul>  
+                        <ul> 
+                                    
+                                    <span style="color:rgb(0, 1, 4); font-size: 1em"> Contract 2</span>
+                        
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"> 
+                                    <% if( (expression.contractDate2 - Date.now())/604800000 <= -1)      {%>
+                                            <li> 
+                                            Signed: <%=expression.contractDate2.toDateString() %>
+                                            </li>
+                                    <% } %> 
+                                
+                                    <% if(expression.contractName2!=null) {%>
+                                            <li> 
+                                            Name: <%=expression.contractName2%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractType2!=null) {%>
+                                            <li> 
+                                            Type: <%=expression.contractType%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractSum2!=null) {%>
+                                            <li> 
+                                            Sum: US$ <%=expression.contractSum2.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                            </li>
+                                    <% } %> 
+                                </span>    
+                                </ul>   
+                    <% } %>  
+                    
+                    <% if(expression.lots=== 3) {%>
+                        <ul>   
+                            <span style="color:rgb(0, 1, 4); font-size: 1em"> Contract 1</span>
+                            
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"> 
+                                <% if( (expression.contractDate - Date.now())/604800000 <= -1)      {%>
+                                            <li> 
+                                            Signed: <%=expression.contractDate.toDateString() %>
+                                            </li>
+                                    <% } %> 
+                                
+                                    <% if(expression.contractName!=null) {%>
+                                            <li> 
+                                            Name: <%=expression.contractName%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractType!=null) {%>
+                                            <li> 
+                                            Type: <%=expression.contractType%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractSum!=null) {%>
+                                            <li> 
+                                            Sum: US$ <%=expression.contractSum.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                            </li>
+                                    <% } %> 
+                                </span>
+                                </ul>  
+                        <ul> 
+                                    
+                                    <span style="color:rgb(0, 1, 4); font-size: 1em"> Contract 2</span>
+                        
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"> 
+                                    <% if( (expression.contractDate2 - Date.now())/604800000 <= -1)      {%>
+                                            <li> 
+                                            Signed: <%=expression.contractDate2.toDateString() %>
+                                            </li>
+                                    <% } %> 
+                                
+                                    <% if(expression.contractName2!=null) {%>
+                                            <li> 
+                                            Name: <%=expression.contractName2%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractType2!=null) {%>
+                                            <li> 
+                                            Type: <%=expression.contractType2%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractSum2!=null) {%>
+                                            <li> 
+                                            Sum: US$ <%=expression.contractSum2.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                            </li>
+                                    <% } %> 
+                                </span>    
+                                </ul>  
+                        <ul> 
+                                    
+                                    <span style="color:rgb(0, 1, 4); font-size: 1em"> Contract 3</span>
+                        
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"> 
+                                    <% if( (expression.contractDate3 - Date.now())/604800000 <= -1)      {%>
+                                            <li> 
+                                            Signed: <%=expression.contractDate3.toDateString() %>
+                                            </li>
+                                    <% } %> 
+                                
+                                    <% if(expression.contractName3!=null) {%>
+                                            <li> 
+                                            Name: <%=expression.contractName3%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractType3!=null) {%>
+                                            <li> 
+                                            Type: <%=expression.contractType3%>
+                                            </li>
+                                    <% } %> 
+                    
+                                    <% if(expression.contractSum3!=null) {%>
+                                            <li> 
+                                            Sum: US$ <%=expression.contractSum3.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                            </li>
+                                    <% } %> 
+                                </span>   
+                                </ul>  
+                    <% } %> 
+
+                        <br>
+
+                        <span style="color:rgb(119, 119, 121); font-size: 1em"> TotalValue = US$ <%=(expression.contractSum + expression.contractSum2 + expression.contractSum3).toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                        <em>(variance = US$ <%=((expression.lot1v + expression.lot2v + expression.lot3v) - (expression.contractSum + expression.contractSum2 + expression.contractSum3))%>)</em></span>
+                        <p><a href="/expressions/<%=expression._id%>/contractSum">Edit</a></p>
+                <% } %> 
+
+                <% if(expression.status==="Evaluation") {%>
+                    <div class="accordion" id="">
+                    <div class="">
+                    
+                    <div id="collapseThree" class="">
+                    <div class="accordion-body">
+
+                <% } %> 
+
+</div> 
+</div> 
+
+
+    <div class="col-sm-6">
+    <br>
+            <span style="color:rgb(162, 164, 165)">
+            <% if(expression.status === "Scheduled") {%>
+            <div class="row">
+                <div class="col-6">
+            <p> <a class="btn btn-sm btn-warning" href="/expressions/<%=expression._id%>/edit">Edit</a></p>
+                </div>
+                <div class="col-6">
+            <form action="/expressions/<%=expression._id%>?_method=DELETE" method="POST">
+            <button class="btn btn-sm btn-danger">Delete</button>
+            </form>
+                </div>
+            </div>
+            <% } %>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+
+    <% if(expression.status==="Evaluation") {%>  
+    <div class="col-12">
+            <h5 style="font-size: 1em">Evaluation notes</h5>
+            <form action="/expressions/<%=expression._id%>/checks" method="POST" class="mb-3 validated-form" novalidate>
+                <div class="mb-3">
+
+                    <textarea class="form-control" name="check[body]" id="body" cols="30" rows="4" required></textarea>
+                
+                </div>
+                <button class="btn btn-sm btn-success ">Submit</button>
+            </form>
+            <% for(let check of expression.checks) { %>
+            <div class="card mb-3 ">
+                <div class="card-body">
+                    <p class="card-text"><%= check.body %> </p>
+                    <p><em><span style="color:rgb(33, 32, 32); font-size: 0.8em" ">Author: <%= check.author.username %> at <%= check.createdAt.toDateString() %></span></em></p>
+                    <form action="/expressions/<%=expression._id%>/checks/<%=check._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <% } %>
+    </div>
+    <% } %>
+
+
+    <% if(expression.status=== "Awarded") {%>
+    <div class="col-12">
+        <h5 style="font-size: 1em">Contract Comments</h5>
+        <form action="/expressions/<%=expression._id%>/comments" method="POST" class="mb-3 validated-form" novalidate>
+            <div class="mb-3">
+              
+                <textarea class="form-control" name="comment[body]" id="body" cols="30" rows="4" required></textarea>
+            
+            </div>
+            <button class="btn btn-sm btn-success">Submit</button>
+        </form>
+        <% for(let comment of expression.comments) { %>
+        <div class="card mb-3 ">
+            <div class="card-body">
+                <p class="card-text">Comment: <%= comment.body %></p>
+                <p><em><span style="color:rgb(33, 32, 32);  font-size: 0.8em">Author: <%= comment.author.username %> at <%= comment.createdAt.toDateString() %></span></em></p>
+                <form action="/expressions/<%=expression._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <% } %>
+
+</div>
+
+

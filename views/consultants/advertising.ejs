@@ -1,0 +1,31 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container mt-3">
+    
+   
+<form action="/consultants/<%=consultant._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+
+    <div class="row"> 
+      
+        
+        <div class="col-sm-4">
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="advertised">BD Advertised (issued) on:</label>
+                <input class="form-control" type="date" id="advertised" name="consultant[advertised]" value="<%=consultant.advertised%>" required>
+            </div>
+        </div>
+    
+        <div class="col-sm-4">
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="deadline">Deadline for Bid Submission scheduled on: </label>
+                <input class="form-control" type="date" id="deadline" name="consultant[deadline]" value="<%=consultant.deadline%>" required>
+            </div>
+        </div>
+
+    <div class="mb-3">
+            <button class=" btn btn-warning btn-sm">Confirm</button>
+    </div>
+
+    
+</div>           
+</form>   

@@ -1,0 +1,66 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container mt-3">
+    
+   
+    <form action="/consultants/<%=consultant._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+
+    <div class="row"> 
+        <hr>
+        <div> Contract</div>
+
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="contractDate">Contract Date</label>
+                    <input class="form-control" type="date" id="contractDate" name="consultant[contractDate]" value="<%=consultant.contractDate%>" required>
+                </div>
+            </div>
+        
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="contractName">Contract Name </label>
+                    <input class="form-control" type="string" id="contractName" name="consultant[contractName]" value="<%=consultant.contractName%>" required>
+                </div>
+            </div>
+        
+           
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="contractSum">Contract Sum (US$)</label>
+                        <input class="form-control" type="number" id="contractSum" name="consultant[contractSum]" value="<%=consultant.contractSum%>" required>
+                </div>
+            </div>
+
+
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
+                <label class="form-label" for="contractType" class="form-label">Contract Type</label>
+                <input class="form-control" list="contracts" id="contractType" name="consultant[contractType]" required>
+                <datalist id="contracts">
+                    <option value="Supply of Goods">
+                    <option value="Time based">
+                    <option value="Lump sum">
+                    <option value="Partial lumpsum">
+                    <option value="Transaction based">
+                    <option value="Other">
+                </datalist>
+                </div>
+            </div>
+        
+
+            <br>
+            <hr>
+
+
+
+
+        <div class="mb-3">
+                <button class=" btn btn-warning btn-sm">Confirm</button>
+        </div>
+
+        
+    </div>           
+    </form>
+
+</div>
+  

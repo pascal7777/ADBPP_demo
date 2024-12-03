@@ -1,0 +1,29 @@
+<nav class="navbar sticky-top navbar-expand-lg" style="background-color: rgb(39, 55, 179,0.94)">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="font-size: 18px; color:white">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+           
+                <a class="nav-link" href="/products" style="font-size: 16px; color:white">Projects</a>
+                <a class="nav-link" href="/expressions" style="font-size: 16px; color:white">Goods Packages</a>
+                <a class="nav-link" href="/consultants" style="font-size: 16px; color:white">Consultancies</a>
+            </div>
+
+            <div class="navbar-nav ml-auto">
+                <% if(!currentUser) {%>
+                <a class="nav-link" href="/login" style="font-size: 16px; color:white"</a>Login</a>
+                <a class="nav-link" href="/register" style="font-size: 16px; color:white"</a>Register</a>
+                <% } else {%> <div class="mt-2" style="font-size: 16px; color:white"><%=currentUser.username%> - <%=currentUser.company%></div>
+                <a class="nav-link" href="/logout" style="font-size: 16px; color:white">Logout</a>
+                <% } %>
+            </div>
+
+
+        </div>
+    </div>
+</nav>
+

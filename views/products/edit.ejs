@@ -1,0 +1,75 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="row"></div>
+    <h1 class="text-center">Edit Device details</h1>
+    <div class="col-6 offset-3">
+
+    <form action="/products/<%=product._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+       
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="name">Project Name</label>
+            <input class="form-control" type="text" id="name" name="product[name]" value="<%=product.name%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="number">Project Number</label>
+            <input class="form-control"  type="text" id="number" name="product[number]" value="<%=product.number%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="approvalNumber">Project Approval Number</label>
+            <input class="form-control"  type="text" id="approvalNumber" name="product[approvalNumber]" value="<%=product.approvalNumber%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="agency">Implementing Agency</label>
+            <input class="form-control"  type="text" id="agency" name="product[agency]" value="<%=product.agency%>">
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="country" class="form-label">Country</label>
+            <input class="form-control" list="countries"name="product[country]" id="country" value="<%=product.country%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="financing">Project Financing</label>
+            <div style="font-size: 12px"><span style="color:rgb(119, 119, 121)">From the final RRP</div>
+            <input class="form-control"  type="decimal" id="financing" name="product[financing]" value="<%=product.financing%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="risk">Procurement Risk</label>
+            <div style="font-size: 12px"><span style="color:rgb(119, 119, 121)">From the Strategic Procurement Plan</div>
+            <input class="form-control"  type="text" id="risk" name="product[risk]" value="<%=product.risk%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="planValue">Procurement Plan Value (Million $US)</label>
+            <input class="form-control" type="decimal" id="planValue" name="product[planValue]" value="<%=product.planValue%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="methods">Procurement Methods (Goods, Works, NCS)</label>
+            <input class="form-control"  type="text" id="methods" name="product[methods]"  value="<%=product.methods%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="methodsCS">Procurement Methods (CS)</label>
+            <input class="form-control"  type="text" id="methodsCS" name="product[methodsCS]"  value="<%=product.methodsCS%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="effective">Effective Date</label>
+            <input class="form-control"  type="text" id="effective" name="product[effective]"  value="<%=product.effective.toDateString()%>">
+        </div>
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="closing">Closing Date</label>
+            <input class="form-control"  type="text" id="closing" name="product[closing]"  value="<%=product.closing.toDateString()%>">
+        </div>
+    
+
+        <button class="btn btn-warning">Update Plan</button>
+    </form>
+<br>
+</div>

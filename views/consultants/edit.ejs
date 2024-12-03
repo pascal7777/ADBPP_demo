@@ -1,0 +1,89 @@
+<% layout('layouts/boilerplate')%>
+    
+
+
+<div class="row">
+<div class="col-6 offset-3">  
+ 
+   
+        <h1 class="text-center">Edit Package</h1> 
+    
+        <h3 class="text-center"><%=consultant.product.name%> - <%=consultant.number%> </h3>
+    
+
+    <form action="/consultants/<%=consultant._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+
+        <div class="mb-3 mt-3">
+                <label class="form-label" for="number">Package Number</label>
+                <input class="form-control" type="text" id="number" name="consultant[number]" value="<%=consultant.number%>">
+        </div>
+        
+        
+        <div class="mb-3 mt-3">
+                <label class="form-label" for="description">Package Description</label>
+                <input class="form-control" type="text" id="description" name="consultant[description]" value="<%=consultant.description%>">
+        </div>
+    
+        
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="value">Package Value</label>
+            <input class="form-control" type="text" id="value" name="consultant[value]" value="<%=consultant.value%>">
+        </div> 
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="sbd" class="form-label">Procurement Method</label>
+            <input class="form-control" list="methodlist" id="method" name="econsultant[method]" value="<%=consultant.method%>">
+            <datalist id="methodlist">
+                <option value="SBD Goods (1S1E) ADB, December 2021">
+                    <option value="OCBS">
+                        <option value="CQS limited">
+                        <option value="ICS">
+                        <option value="Direct Contracting">
+                        <option value="Other">
+            </datalist>
+        </div>   
+       
+      
+        
+        
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="review">ADB Review</label>
+            <input class="form-control" type="text" id="review" name="consultant[review]" value="<%=consultant.review%>">
+        </div>  
+       
+      
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="procedure">Procedure</label>
+            <input class="form-control" type="text" id="procedure" name="consultant[procedure]" value="<%=consultant.procedure%>">
+        </div>  
+        
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="advertising">Advertising</label>
+            <input class="form-control" type="text" id="advertising" name="consultant[advertising]" value="<%=consultant.avertising%>">
+        </div> 
+        
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="approach">Approach (market)</label>
+            <input class="form-control" type="text" id="approach" name="consultant[approach]" value="<%=consultant.approach%>">
+        </div> 
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="contracts">Nr Contracts anticipated</label>
+            <input class="form-control" type="number" id="contracts" name="consultant[contracts]" value="<%=consultant.contracts%>">
+        </div> 
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="contractValue">Contract Value (sum) (if awarded)</label>
+            <input class="form-control" type="number" id="contractValue" name="consultant[contractValue]" value="<%=consultant.contractValue%>">
+        </div> 
+
+        <br>
+            <div class="mb-3">
+                <button class="btn btn-primary">Update Package</button>
+            </div>
+
+        
+    </form>
+
+</div>
+</div>
