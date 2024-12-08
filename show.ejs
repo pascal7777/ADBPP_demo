@@ -1,0 +1,239 @@
+<% layout('layouts/boilerplate')%>
+    
+    <h1>
+        <%=product.name.toUpperCase()%>  
+    </h1>
+
+<div class="row">
+<div class="col-sm-5" style=" line-height:1.1">
+<span style="color:rgb(119, 119, 121); font-size: 1em"> Procurement Plan Version: <em><%= product.createdAt.toDateString()%></em> 
+    <% if( (product.createdAt - Date.now())/604800000 <= -1)      {%>
+    (<%= - Math.floor( (product.createdAt - Date.now())/1209600000)%> week(s) ago)
+    <% } %>    
+    <br>Author: <%= product.author.username%> 
+    <br>
+
+Status: </span> 
+        <% if(product.status==="DRAFT" ) {%>
+         <span style="color:rgb(48, 8, 249)">
+         <%=product.status %>
+        </span>
+        <% } %>
+        <% if(product.status==="SUBMITTED" ) {%>
+        <span style="color:rgb(48, 8, 249)">
+        <%=product.status %>
+        </span>
+        <% } %>
+        <% if(product.status==="RETURNED" ) {%>
+        <span style="color:rgb(213, 154, 4)">
+        <%=product.status %>
+        </span>
+        <% } %>
+        <% if(product.status==="APPROVED" ) {%>
+        <span style="color:rgb(3, 98, 25)">
+        <%=product.status %>
+        </span>
+        <% } %>
+        <% if(product.status==="REVISION" ) {%>
+            <span style="color:rgb(213, 154, 4)">
+            <%=product.status %>
+            </span>
+            <% } %>
+
+
+</div> 
+<div class="col-sm-4" style=" line-height:1.3">
+    <% if(product.createdAt.toDateString() != product.updatedAt.toDateString()) {%>
+        <span style="color:rgb(119, 119, 121); font-size: 1em"> Last Edited by: <%= product.editor.username%>
+   <br>On: <em> <%= product.updatedAt.toDateString()%></em> 
+     <% if( (product.updatedAt - Date.now())/604800000 <= -1)      {%>
+    (<%= - Math.floor( (product.updatedAt - Date.now())/1209600000)%> week(s) ago)
+     <% } %>    
+    </span>
+    <% } %>
+</div>   
+    
+
+<div class="col-sm-1" style=" line-height:1.3">
+    <%  if(currentUser && currentUser.isAdmin || currentUser && currentUser.isADB)  {%>
+        <div class="col-sm-4">          
+            <p> <a class="btn btn-sm btn-primary" href="/products/<%=product._id%>/status">Status</a></p>       
+        </div>
+          <% } %>
+</div> 
+<div class="col-sm-1" style=" line-height:1.3">
+<%  if( currentUser && product.author.equals(currentUser._id) || currentUser && currentUser.isAdmin || currentUser && currentUser.isADB)  {%>
+    <div class="col-sm-4">
+        <p style="margin-left:1em;"> <a class="btn btn-sm btn-warning" href="/products/<%=product._id%>/edit">Edit</a></p>
+    </div>
+    <% } %>
+</div> 
+<div class="col-sm-1" style=" line-height:1.3">
+    <%  if( currentUser && product.author.equals(currentUser._id) || currentUser && currentUser.isAdmin || currentUser && currentUser.isADB)  {%>
+    <div class="col-sm-4">
+        <form action="/products/<%=product._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-sm btn-danger" style="margin-left:1em;">Delete</button>
+        <span style="color:rgb(162, 164, 165); font-size: 1.1vw">
+        </span></form>
+    </div>
+    <% } %>
+</div> 
+
+</div>  
+    
+<div class="container">
+<br>
+    <div class="row">
+        <div class="col-sm-6">
+                <div class="card">
+                        <div class="card-body">
+                            <ul>
+                                <li><div style="font-size: 1.2em">Project Name:</div> <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%= product.name.toUpperCase()%></span></div>
+                                </li>
+                                <li><div class="mt-3" style="font-size: 1.2em">Project Number:</div> <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%=product.number%> </span></div>
+                                </li> 
+                                <li><div class="mt-3" style="font-size: 1.2em">Approval Number:</div> <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%=product.approvalNumber%> </span></div>
+                                </li> 
+                                <li> <div class="mt-3" style="font-size: 1.2em">Implementing Agency:</div> <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%=product.agency%> - <%=product.country%>  </span></div>
+                                </li> 
+                                <li><div class="mt-3" style="font-size: 1.2em">Project Financing:</div> <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)">US$ <%= product.financing%> million</span></div>
+                                </li>
+                                <li> <div class="mt-3" style="font-size: 1.2em">Procurement Value (estimated):</div> <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)">US$ <%=product.planValue%> million</span></div>
+                                </li> 
+
+                            </ul>
+                        
+                        </div>
+                        </div>
+         
+    
+    </div>
+
+
+        <div class="col-sm-6">
+            <div class="card">
+            <div class="card-body">
+            
+            <ul>
+                
+                <li><div style="font-size: 1.2em">Procurement Methods used (Goods & NCS, WOrks):</div>
+                <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%= product.methods%></span></div></li>
+                <li><div class="mt-3" style="font-size: 1.2em">Procurement Methods used (Consultancies):</div>
+                <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%= product.methodsCS%></span></div></li>
+                
+                <li><div class="mt-3" style="font-size: 1.2em">Procurement Risk:</div> <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%= product.risk%></span></div></li>
+
+                <li><div class="mt-3" style="font-size: 1.2em">Project Effective Date:</div><h3 style="font-size: 1.2em"><%= product.effective.toDateString()%></h3></li>
+                <h3 style="font-size: 1em"><em>  <span style="color:rgb(64, 64, 66)">(<%= moment(product.effective).fromNow() %>)</span></em></h3> 
+                
+                <li><div class="mt-3" style="font-size: 1.2em">Project Closing Date:</div><h3 style="font-size: 1.2em"><%= product.closing.toDateString()%></h3>
+                            <%  if( product.closing < Date.now())  {%>
+                            <h3 style="font-size: 1em"><em>  <span style="color:rgb(157, 6, 6)">(<%= moment(product.closing).fromNow() %>)</span></em></h3>  
+                            <% } else{ %>
+                                <h3 style="font-size: 1em"><em><span style="color:rgb(64, 64, 66)">(<%= moment(product.closing).fromNow() %>)</span></em></h3>  
+                            <% } %>
+                            <div class="row">
+                            <%  if( currentUser && currentUser.isAdmin) {%>
+                            <div class="col-sm-12">            
+                            <p class="mt-3"><a class="btn btn-sm btn-success" href="/products/<%=product._id%>/close" role="button">Update Closing Date</a></p>         
+                            </div>
+                            <% } %>
+                            </div>  
+                </li>
+
+                <!-- <li><div class="mt-3" style="font-size: 1.2em">Comments:</div> <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%= product.comments%></span></div></li> -->
+            </ul>   
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="container">            
+               
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                <h3>Packages for Goods & NCS (<%=product.expressions.length%>)</h3>        
+                    <% for(let expression of product.expressions) {%>
+                            
+                            <ul>
+                            <li>
+                                <p style="font-size: 1.em"> <span style="color:rgb(119, 119, 121)"><a href="/expressions/<%=expression._id%>"><%=expression.number%> - <%=expression.description%></a> - <%=expression.status%> </span></p>
+                            </li>
+                            </ul>
+                          
+                            <% } %> 
+
+                    <%  if(( currentUser && product.author.equals(currentUser._id) || currentUser &&
+                    currentUser.isAdmin || currentUser && currentUser.isADB) & (product.status==="DRAFT" || product.status==="REVISION" || product.status==="RETURNED")) {%>
+                        <p><a class="btn btn-sm btn-primary" href="/products/<%=product._id%>/expressions/new">Add a new Package</a> </p> 
+                        <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                <h3>Packages for Civil Works <br>(<%=product.works.length%>)</h3>        
+                    <% for(let work of product.works) {%>
+                            
+                            <ul>
+                            <li>
+                                <p style="font-size: 1.em"> <span style="color:rgb(119, 119, 121)"><a href="/works/<%=work._id%>"><%=work.number%> - <%=work.description%></a> - <%=work.status%> </span></p>
+                            </li>
+                            </ul>
+                          
+                            <% } %> 
+
+                    <%  if(( currentUser && product.author.equals(currentUser._id) || currentUser &&
+                    currentUser.isAdmin || currentUser && currentUser.isADB) & (product.status==="DRAFT" || product.status==="REVISION" || product.status==="RETURNED")) {%>
+                        <p><a class="btn btn-sm btn-primary" href="/products/<%=product._id%>/works/new">Add a new Package</a> </p> 
+                        <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Packages for Consultancies (<%=product.consultants.length%>)</h3>        
+                        <% for(let consultant of product.consultants) {%>
+                               
+                                <ul>
+                                <li>
+                                    <p style="font-size: 1.em"> <span style="color:rgb(119, 119, 121)"><a href="/consultants/<%=consultant._id%>"><%=consultant.number%>- <%=consultant.description%></a> - <%=consultant.status%></span></p>
+                                </li>
+                                </ul>
+                              
+                                <% } %> 
+                        
+    
+                        <%  if(( currentUser && product.author.equals(currentUser._id) || currentUser &&
+                        currentUser.isAdmin || currentUser && currentUser.isADB) & (product.status==="DRAFT" || product.status==="REVISION" || product.status==="RETURNED")) {%>
+                            <p><a class="btn btn-sm btn-primary" href="/products/<%=product._id%>/consultants/new">Add a new Package</a> </p> 
+            
+                            <% } %>
+                </div>
+            </div>
+        </div>
+    
+      
+      
+
+                
+         
+        </div>
+    </div>
+</div>
+
+
+
+
