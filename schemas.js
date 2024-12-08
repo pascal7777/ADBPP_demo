@@ -59,6 +59,27 @@ module.exports.consultantSchema = Joi.object({
     deleteImages:Joi.array()
 });
 
+module.exports.workSchema = Joi.object({
+    work: Joi.object({
+        number: Joi.string().required(),
+        description: Joi.string().required(),
+        value: Joi.number().required(),
+        method: Joi.string().required(),
+        sbd: Joi.string().required(),
+        review: Joi.string().required(),
+        procedure: Joi.string().required(),
+        advertisingQ: Joi.string().allow('', null),
+        advertisingY: Joi.string().allow('', null),
+        approach: Joi.string().allow('', null),
+        domesticPreference: Joi.string().allow('', null),
+        lots: Joi.number().allow('', null),
+        contracts: Joi.number().allow('', null),
+        contractValue: Joi.number().allow('', null),
+        status: Joi.string().allow('', null),
+    }).required(),
+    deleteImages:Joi.array()
+});
+
 module.exports.checkSchema = Joi.object({
     check: Joi.object({
         rating: Joi.number().required().min(1).max(10),
@@ -75,8 +96,9 @@ module.exports.commentSchema = Joi.object({
 
 module.exports.evaluationSchema = Joi.object({
     evaluation: Joi.object({
-        rating: Joi.number().required().min(1).max(10),
-        body: Joi.string().required()
+        company: Joi.string().allow('', null),
+        country: Joi.string().allow('', null),
+        body: Joi.string().allow('', null),
     }).required()
 });
 

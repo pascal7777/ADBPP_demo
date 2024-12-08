@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate')%>
 
-    <h1 style="font-size: 2.5vw">Goods & NCS Packages</h1>
+    <h1 style="font-size: 2.5vw">Works Packages</h1>
     
     <div class="d-flex bd-highlight"> <input type=" text" id="myInput3" onkeyup="myFunction()"
         style="width:15em; padding: 2px 2px 5px 10px" placeholder="Filter for Project (description)...">
@@ -60,89 +60,89 @@
 
             <tbody>
             <tr>
-            <% for (let expression of expressions){%>
+            <% for (let work of works){%>
                 <td>
-                    <%  if( currentUser && expression.author.equals(currentUser._id) || currentUser &&
+                    <%  if( currentUser && work.author.equals(currentUser._id) || currentUser &&
                         currentUser.isAdmin || currentUser &&
                         currentUser.isADB)  {%>
-                        <a style=color:blue" href="/expressions/<%= expression._id %>"><%= expression.number %></a>
+                        <a style=color:blue" href="/works/<%= work._id %>"><%= work.number %></a>
                         <% } else{ %>
-                           <%= expression.number%>
+                           <%= work.number%>
                         <% } %>
                 </td>
                 <td>
-                    <%=expression.product.number%> 
+                    <%=work.product.number%> 
                 </td>
                 <td>
-                    <%=expression.product.name%>
+                    <%=work.product.name%>
                 </td>
                 <td>
-                    <%=expression.product.country%>
+                    <%=work.product.country%>
                 </td>
                 <td>
-                    <%=expression.description%>
+                    <%=work.description%>
                 </td>
-                <td>  <% if(expression.value!=null) {%>
-                    <%=expression.value.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                <td>  <% if(work.value!=null) {%>
+                    <%=work.value.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
                     <% } %> 
                 </td>
                 <td>
-                    <%=expression.method%>
+                    <%=work.method%>
                 </td>
                 <td>
-                    <%=expression.lots%>
+                    <%=work.lots%>
                 </td>
                 <td>
-                    <%=expression.sbd%>
+                    <%=work.sbd%>
                 </td>
                 <td>
-                    <%=expression.advertisingQ%>-<%=expression.advertisingY%>
+                    <%=work.advertisingQ%>-<%=work.advertisingY%>
                 </td>
                 <td>
-                    <%=expression.approach%>
+                    <%=work.approach%>
                 </td>
                 <td>
-                    <%=expression.review%>
+                    <%=work.review%>
                 </td>
         
                 <td>
-                    <% if(expression.status==="Scheduled" ) {%>
+                    <% if(work.status==="Scheduled" ) {%>
                         <span style="color:rgb(6, 6, 241)">
-                            <%=expression.status%>
+                            <%=work.status%>
                         </span>
                         <% } %>
-                        <% if(expression.status==="Advertised" ) {%>
+                        <% if(work.status==="Advertised" ) {%>
                             <span style="color:rgb(34,187,51)">
-                                <%=expression.status%>
+                                <%=work.status%>
                             </span>
                             <% } %>
-                           <% if(expression.status==="Evaluation" ) {%>
+                           <% if(work.status==="Evaluation" ) {%>
                                 <span style="color:rgb(246, 219, 9)">
-                                    <%=expression.status%>
+                                    <%=work.status%>
                                 </span>   
                                 <% } %>    
-                                <% if(expression.status==="Awarded" ) {%>
+                                <% if(work.status==="Awarded" ) {%>
                                     <span style="color:rgb(6, 85, 2)">
-                                        <%=expression.status%>
+                                        <%=work.status%>
                                     </span>   
                                     <% } %>        
-                                <% if(expression.status==="Cancelled" ) {%>
+                                <% if(work.status==="Cancelled" ) {%>
                                     <span style="color:rgb(240, 6, 6)">
-                                        <%=expression.status%>
+                                        <%=work.status%>
                                     </span>   
                                     <% } %>         
                 </td>
                 <td>
-                   <em><%= expression.updatedAt.toDateString()%></em>
-                        <% if(Math.floor( (expression.updatedAt - Date.now())/10368000000) > 1)      {%>
-                            (<%= - Math.floor( (expression.updatedAt - Date.now())/10368000000)%> week(s) ago)
+                   <em><%= work.updatedAt.toDateString()%></em>
+                        <% if(Math.floor( (work.updatedAt - Date.now())/10368000000) > 1)      {%>
+                            (<%= - Math.floor( (work.updatedAt - Date.now())/10368000000)%> week(s) ago)
                             <% } %>  
                     </td>
                   
                     <td>
-                        <%  if(expression.evaluations.length===0)  {%>
+                        <%  if(work.evaluationworks.length===0)  {%>
                             <% } else{ %> 
-                                (<%=expression.evaluations.length%>) 
+                                (<%=work.evaluationworks.length%>) 
                         <% } %> 
                         <td>
                         </td>
@@ -238,5 +238,3 @@
             }
         }
     </script>
-
-  

@@ -116,7 +116,7 @@ Status: </span>
             
             <ul>
                 
-                <li><div style="font-size: 1.2em">Procurement Methods used (Goods, Works and NCS):</div>
+                <li><div style="font-size: 1.2em">Procurement Methods used (Goods & NCS, Works):</div>
                 <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%= product.methods%></span></div></li>
                 <li><div class="mt-3" style="font-size: 1.2em">Procurement Methods used (Consultancies):</div>
                 <div style="font-size: 1.2em"><span style="color:rgb(119, 119, 121)"><%= product.methodsCS%></span></div></li>
@@ -157,26 +157,19 @@ Status: </span>
 <div class="container">            
                
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                <h3>Packages for Goods, Works and NCS (<%=product.expressions.length%>)</h3>        
+                <h3>Packages for Goods & NCS (<%=product.expressions.length%>)</h3>        
                     <% for(let expression of product.expressions) {%>
-                            <%  if( currentUser && expression.author.equals(currentUser._id) || currentUser &&
-                            currentUser.isAdmin || currentUser && currentUser.isADB)  {%>
+                            
                             <ul>
                             <li>
                                 <p style="font-size: 1.em"> <span style="color:rgb(119, 119, 121)"><a href="/expressions/<%=expression._id%>"><%=expression.number%> - <%=expression.description%></a> - <%=expression.status%> </span></p>
                             </li>
                             </ul>
-                            <% } else{ %> 
-                            <ul>
-                            <li>
-                                <p style="font-size: 1.2em"> <span style="color:rgb(119, 119, 121)"> <%=expression.number%> - <%=expression.description%> - <%=expression.status%> </span></p>
-                            </li>
-                            </ul>
+                          
                             <% } %> 
-                    <% } %> 
 
                     <%  if(( currentUser && product.author.equals(currentUser._id) || currentUser &&
                     currentUser.isAdmin || currentUser && currentUser.isADB) & (product.status==="DRAFT" || product.status==="REVISION" || product.status==="RETURNED")) {%>
@@ -185,7 +178,30 @@ Status: </span>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                <h3>Packages for Civil Works <br>(<%=product.works.length%>)</h3>        
+                    <% for(let work of product.works) {%>
+                            
+                            <ul>
+                            <li>
+                                <p style="font-size: 1.em"> <span style="color:rgb(119, 119, 121)"><a href="/works/<%=work._id%>"><%=work.number%> - <%=work.description%></a> - <%=work.status%> </span></p>
+                            </li>
+                            </ul>
+                          
+                            <% } %> 
+
+                    <%  if(( currentUser && product.author.equals(currentUser._id) || currentUser &&
+                    currentUser.isAdmin || currentUser && currentUser.isADB) & (product.status==="DRAFT" || product.status==="REVISION" || product.status==="RETURNED")) {%>
+                        <p><a class="btn btn-sm btn-primary" href="/products/<%=product._id%>/works/new">Add a new Package</a> </p> 
+                        <% } %>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
                     <h3>Packages for Consultancies (<%=product.consultants.length%>)</h3>        
@@ -200,7 +216,7 @@ Status: </span>
                                 <% } else{ %> 
                                 <ul>
                                 <li>
-                                    <p style="font-size: 1.2em"> <span style="color:rgb(119, 119, 121)"> <%=consultant.number%> - <%=consultant.status%> (<%=consultant.createdAt.toDateString()%>)</span></p>
+                                    <p style="font-size: 1.2em"> <span style="color:rgb(119, 119, 121)"> <%=consultant.number%> - <%=consultant.status%></span></p>
                                 </li>
                                 </ul>
                                 <% } %> 

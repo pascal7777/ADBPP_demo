@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Product = require('./product');
 const Comment = require('./comment');
-const Evaluation= require('./evaluation');
+const Evaluationwork= require('./evaluationwork');
 const { Schema } = mongoose;
 
 
@@ -15,7 +15,7 @@ ImageSchema.virtual('thumbnail').get(function () {
     return this.url.replace('/upload', '/upload/w_200');
 });
 
-const expressionSchema = new Schema({
+const workSchema = new Schema({
     number:{
         type: String
     },
@@ -151,10 +151,10 @@ const expressionSchema = new Schema({
                 ref: 'Comment'
             }
         ],
-    evaluations: [
+    evaluationworks: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Evaluation'
+                ref: 'Evaluationwork'
             }
         ],
     assessments: [
@@ -174,26 +174,23 @@ const expressionSchema = new Schema({
 );
 
 
-expressionSchema.post('findOneAndDelete', async function (expression) {
-    if (expression.comments.length) {
-        await Comment.deleteMany({ _id: { $in: expression.comments } })
+workSchema.post('findOneAndDelete', async function (worj) {
+    if (work.comments.length) {
+        await Comment.deleteMany({ _id: { $in: work.comments } })
     }
 })
 
-expressionSchema.post('findOneAndDelete', async function (expression) {
-    if (expression.evaluations.length) {
-        await Evaluation.deleteMany({ _id: { $in: expression.evaluations} })
+workSchema.post('findOneAndDelete', async function (work) {
+    if (work.evaluationworks.length) {
+        await Evaluationwork.deleteMany({ _id: { $in: work.evaluationworks} })
     }
 })
 
 
 
 
-const Expression = mongoose.model('Expression', expressionSchema);
+const Work = mongoose.model('Work', workSchema);
 
 
 
-module.exports = Expression; 
-
-
-
+module.exports = Work; 

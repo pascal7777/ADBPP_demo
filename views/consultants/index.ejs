@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate')%>
 
-    <h1 style="font-size: 2.5vw">Consultant Packages</h1>
+    <h1 style="font-size: 2.5vw">Consultancy Packages</h1>
     
     <div class="d-flex bd-highlight"> <input type=" text" id="myInput3" onkeyup="myFunction()"
         style="width:12em; padding: 2px 2px 5px 10px" placeholder="Filter for Package ...">
@@ -46,6 +46,9 @@
                     <th>
                     Last update status
                     </th>
+                    <th>
+                    EOIs
+                    </th>
                 </tr>
             </thead>
 
@@ -82,7 +85,7 @@
                     <%=consultant.method%>
                 </td>         
                 <td>
-                    <%=consultant.advertising%>
+                    <%=consultant.advertisingQ%>-<%=consultant.advertisingY%>
                 </td>
                 <td>
                     <%=consultant.approach%>
@@ -123,6 +126,12 @@
                             (<%= - Math.floor( (consultant.updatedAt - Date.now())/10368000000)%> week(s) ago)
                             <% } %>  
                 </td>
+                <td>
+                    <%  if(consultant.evaluationcons.length===0)  {%>
+                        <% } else{ %> 
+                            (<%=consultant.evaluationcons.length%>) 
+                    <% } %> 
+                    <td>
             </tr>
             </tbody>  
             <% }%>

@@ -4,7 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const { checkSchema } = require('../schemas.js');
 const { commentSchema } = require('../schemas.js');
 const { consultantSchema } = require('../schemas.js');
-const { evaluationSchema } = require('../schemas.js');
+const { evaluationconSchema } = require('../schemas.js');
 const { isLoggedIn } = require('../middleware');
 const ExpressError = require('../utils/ExpressError');
 const Product = require('../models/product');
@@ -17,10 +17,9 @@ const upload = multer({ storage});
 const Consultant = require('../models/consultant');
 const Check = require('../models/check');
 const Comment = require('../models/comment');
-const Evaluation = require('../models/evaluation');
+const Evaluationcon = require('../models/evaluationcon');
 const Assessment = require('../models/assessment');
 const Reject = require('../models/reject');
-
 
 const validateConsultant = (req, res, next) => {
     const { error } = consultantSchema.validate(req.body.consultant);
@@ -42,29 +41,24 @@ const validateComment = (req, res, next) => {
     }
 }
 
-const validateEvaluation = (req, res, next) => {
-    const { error } = evaluationSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
-
-
+// const validateEvaluationcon = (req, res, next) => {
+//     const { error } = evaluationconSchema.validate(req.body);
+//     if (error) {
+//         const msg = error.details.map(el => el.message).join(',')
+//         throw new ExpressError(msg, 400)
+//     } else {
+//         next();
+//     }
+// }
 
 router.get('/', catchAsync(async (req, res) => {
-    const consultants = await Consultant.find({}).populate('product');
+    const consultants = await Consultant.find({}).populate('product').populate('evaluationcons');
     res.render('consultants/index', { consultants })
 }));
 
-
-
-
 router.get('/:id', isLoggedIn, catchAsync(async (req, res,) => {
     const {id} =req.params;    
-    const consultant = await Consultant.findById(id).populate('product').populate ({
+    const consultant = await Consultant.findById(id).populate('product').populate('evaluationcons').populate ({
         path: 'checks',
         populate: {
             path: 'author'
@@ -75,7 +69,7 @@ router.get('/:id', isLoggedIn, catchAsync(async (req, res,) => {
             path: 'author'
         }
     }).populate ({
-        path: 'evaluations',
+        path: 'evaluationcons',
         populate: {
             path: 'author'
         }
@@ -97,6 +91,11 @@ router.get('/:id', isLoggedIn, catchAsync(async (req, res,) => {
     res.render('consultants/show', { consultant });
 }));
 
+router.get('/:id/evaluationcons/new', isLoggedIn, catchAsync(async (req,res) => {
+    const {id} = req.params;
+    const consultant = await Consultant.findById(id);
+    res.render('evaluationcons/new',{consultant})
+}));
 
 router.get('/:id/status', catchAsync(async (req, res) => {
     const consultant= await Consultant.findById(req.params.id).populate('product');
@@ -152,7 +151,6 @@ router.get('/:id/ce', catchAsync(async (req, res) => {
     res.render('consultants/ce', { consultant});
 }))
 
-
 router.get('/:id/edit', catchAsync(async (req, res) => {
     const consultant = await Consultant.findById(req.params.id).populate('product');
     if (!consultant) {
@@ -176,8 +174,6 @@ router.delete('/:id', catchAsync(async (req, res) => {
     req.flash('success', 'Successfully deleted this Package');
     res.redirect('/consultants');
 }));
-
-
 
 router.post('/:id/checks', isLoggedIn, catchAsync(async (req, res) => {
     const consultant = await Consultant.findById(req.params.id);
@@ -215,23 +211,26 @@ router.delete('/:id/comments/:commentId', catchAsync(async (req, res) => {
     res.redirect(`/consultants/${id}`);
 }))
 
-
-
-router.post('/:id/evaluations', isLoggedIn, validateEvaluation, catchAsync(async (req, res) => {
-    const consultant = await Consultant.findById(req.params.id);
-    const evaluation = new Evaluation(req.body.evaluation );
-    consultant.evaluations.push(evaluation );
-    evaluation.author = req.user._id;
-    await evaluation.save();
+router.post('/:id/evaluationcons/', isLoggedIn, catchAsync(async(req,res) => {
+    const { id } = req.params;
+    const consultant = await Consultant.findById(id);
+    const {company, country, body} = req.body;
+    const evaluationcon = new Evaluationcon ({company, country, body});
+    consultant.evaluationcons.push(evaluationcon);
+    evaluationcon.consultant = consultant;
+    evaluationcon.author = req.user._id;
+    evaluationcon.editor = req.user._id;
     await consultant.save();
-    res.redirect(`/consultants/${consultant._id}`);
+    await evaluationcon.save();
+    console.log (evaluationcon)
+    res.redirect(`/works/${id}`)
 }))
 
-router.delete('/:id/evaluations/:evaluationId', catchAsync(async (req, res) => {
-    const { id, evaluationId } = req.params;
-    await Consultant.findByIdAndUpdate(id, { $pull: { evaluations: evaluationId } });
-    await Evaluation.findByIdAndDelete(evaluationId);
-    req.flash('success', 'Successfully deleted this evaluation');
+router.delete('/:id/evaluationcons/:evaluationconId', catchAsync(async (req, res) => {
+    const { id, evaluationconId } = req.params;
+    await Consultant.findByIdAndUpdate(id, { $pull: { evaluationscon: evaluationconId } });
+    await Evaluationcon.findByIdAndDelete(evaluationconId);
+    req.flash('success', 'Successfully deleted this evaluationcon');
     res.redirect(`/consultants/${id}`);
 }))
 

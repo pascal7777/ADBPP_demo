@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Product = require('./product');
 const Comment = require('./comment');
-const Evaluation= require('./evaluation');
+const Evaluationcon= require('./evaluationcon');
 const { Schema } = mongoose;
 
 
@@ -40,7 +40,10 @@ const consultantSchema = new Schema({
     procedure:{
         type: String
     },
-    advertising:{
+    advertisingQ:{
+        type: String
+    },
+    advertisingY:{
         type: String
     },
     approach:{
@@ -148,10 +151,10 @@ const consultantSchema = new Schema({
                 ref: 'Comment'
             }
         ],
-    evaluations: [
+    evaluationcons: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Evaluation'
+                ref: 'Evaluationcon'
             }
         ],
     assessments: [
@@ -178,8 +181,8 @@ consultantSchema.post('findOneAndDelete', async function (consultant) {
 })
 
 consultantSchema.post('findOneAndDelete', async function (consultant) {
-    if (consultant.evaluations.length) {
-        await Evaluation.deleteMany({ _id: { $in: consultant.evaluations} })
+    if (consultant.evaluationcons.length) {
+        await Evaluationcon.deleteMany({ _id: { $in: consultant.evaluationcons} })
     }
 })
 

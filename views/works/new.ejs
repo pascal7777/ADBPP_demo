@@ -3,10 +3,10 @@
 <div class="row">
     
 <div class="col-6 offset-3">   
-            <h1 class="text-center">Add a new Goods/NCS Package for:</h1>
+            <h1 class="text-center">Add a new Works Package for:</h1>
             <h2 class="text-center"> <%= product.name%></h2>
 
-    <form action="/products/<%=product._id%>/expressions" method="POST" novalidate class = "validated-form">
+    <form action="/products/<%=product._id%>/works" method="POST" novalidate class = "validated-form">
 
     <div class="row">  
                 
@@ -56,17 +56,12 @@
                     <label class="form-label" for="sbd" class="form-label">Standard Bid Document</label>
                     <input class="form-control" list="sbdlist" id="sbd" name="sbd" required>
                     <datalist id="sbdlist">
-                        <option value="SBD Goods (1S1E) ADB, December 2021">
-
-                            <option value="Harmonized OCB-SBD Goods or NCS, 25 April 2022 (ADB)">
-                            <option value="Harmonized OCB-SBD Goods or Non-Consulting Services, PPMD (MOF), 25 April 2022 - English">
-                            <option value="Sample Document RFQ Goods (ADB)">
-                            <option value="Harmonized Request for Quotation for the Procurement of Goods and nonconsulting  services, PPMD (MOF), August 2021 - English">
-                            
-                            <option value="Sample Document RFQ NCS (ADB)">
-                            <option value="Harmonized Request for Quotation for the Procurement of Goods and nonconsulting  services, PPMD (MOF), August 2021 - English">
-
-                            <option value="Standard Request for Proposal (ADB)">
+                        <option value="SBD Works (1S1E) ADB, December 2021">
+                        <option value="Harmonized OCB-SBD Works, 25 April 2022 (ADB)">
+                        <option value="Harmonized Open Bidding Document Procurement of Works, PPMD (MOF), August 2021">
+                        <option value="Sample Document RFQ Works (ADB)">
+                        <option value="Harmonized Request for Quotation for the Procurement of Works, PPMD (MOF), August 2021 - English">
+                        <option value="Standard Request for Proposal (ADB)">
                     </datalist>
         </div>  
 
@@ -169,12 +164,3 @@
 <br>
 </div>
 </div>
- 
-       
-       
-       
-       
-         
-
-       
-

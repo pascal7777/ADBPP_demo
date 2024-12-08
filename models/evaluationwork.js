@@ -2,14 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const evaluationSchema = new Schema({
+const evaluationworkSchema = new Schema({
         company: String,
         country: String,
         body: String,
-        expression: 
+        work: 
         {
             type: Schema.Types.ObjectId,
-            ref: 'Expression'
+            ref: 'Work'
         },
         author: {
             type: Schema.Types.ObjectId,
@@ -19,4 +19,4 @@ const evaluationSchema = new Schema({
     { timestamps: true }
 );
 
-module.exports = mongoose.model('Evaluation', evaluationSchema);
+module.exports = mongoose.model('Evaluationwork', evaluationworkSchema);

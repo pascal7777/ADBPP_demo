@@ -1,0 +1,172 @@
+<% layout('layouts/boilerplate')%>
+    
+
+
+<div class="row">
+<div class="col-6 offset-3">  
+ 
+   
+        <h1 class="text-center">Edit Package</h1> 
+    
+        <h3 class="text-center"><%=work.product.name%> - <%=work.number%> </h3>
+    
+
+    <form action="/works/<%=work._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+
+        <div class="mb-3 mt-3">
+                <label class="form-label" for="number">Package Number</label>
+                <input class="form-control" type="text" id="number" name="work[number]" value="<%=work.number%>">
+        </div>
+        
+        
+        <div class="mb-3 mt-3">
+                <label class="form-label" for="description">Package Description</label>
+                <input class="form-control" type="text" id="description" name="work[description]" value="<%=work.description%>">
+        </div>
+    
+        
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="value">Package Value (US$)</label>
+            <input class="form-control" type="number" id="value" name="work[value]" value="<%=work.value%>">
+        </div> 
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="sbd" class="form-label">Procurement Method</label>
+            <input class="form-control" list="methodlist" id="method" name="work[method]" value="<%=work.method%>">
+            <datalist id="methodlist">
+                <option value="SBD Goods (1S1E) ADB, December 2021">
+                    <option value="OCB">
+                    <option value="OCB limited">
+                    <option value="RFQ">
+                    <option value="RFQ limited">
+                    <option value="Direct Contracting">
+                    <option value="Other">
+            </datalist>
+        </div>  
+        
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="prequal" class="form-label">Pre-qualification step</label>
+            <input class="form-control" list="yesno" id="prequal" name="work[prequal]" value="<%=work.prequal%>">
+            <datalist id="yesno">
+                <option value="Yes">
+                <option value="No">
+                <option value="N/A">
+            </datalist>
+        </div>  
+       
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="sbd" class="form-label">Standard Bid Document</label>
+            <input class="form-control" list="sbdlist" id="sbd" name="work[sbd]" value="<%=work.sbd%>">
+            <datalist id="sbdlist">
+                <option value="SBD Goods (1S1E) ADB, December 2021">
+
+                    <option value="Harmonized OCB-SBD Goods or NCS, 25 April 2022 (ADB)">
+                    <option value="Harmonized OCB-SBD Goods or Non-Consulting Services, PPMD (MOF), 25 April 2022 - English">
+                    <option value="Sample Document RFQ Goods (ADB)">
+                    <option value="Harmonized Request for Quotation for the Procurement of Goods and nonconsulting  services, PPMD (MOF), August 2021 - English">
+                    
+                    <option value="Harmonized OCB-SBD Works, 25 April 2022 (ADB)">
+                    <option value="Harmonized Open Bidding Document Procurement of Works, PPMD (MOF), August 2021">
+                    <option value="Sample Document RFQ Works (ADB)">
+                    <option value="Harmonized Request for Quotation for the Procurement of Works, PPMD (MOF), August 2021 - English">
+                    
+                    <option value="Sample Document RFQ NCS (ADB)">
+                    <option value="Harmonized Request for Quotation for the Procurement of Goods and nonconsulting  services, PPMD (MOF), August 2021 - English">
+            </datalist>
+        </div>  
+           
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="review" class="form-label">ADB Review</label>
+            <input class="form-control" list="listReview" id="review" name="work[review]" value="<%=work.review%>">
+            <datalist id="listReview">
+                <option value="Prior">
+                    <option value="Post (sample)">
+            </datalist>
+</div>  
+          
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="procedure">Procedure</label>
+            <input class="form-control" type="text" id="procedure" name="work[procedure]" value="<%=work.procedure%>">
+        </div>  
+        
+       
+        
+        <div class="row">  
+        <div class="col-sm-6">
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="advertisingQ" class="form-label">Planned for Advertising (Q)</label>
+                <input class="form-control" list="qlist" id="advertisingQ" name="work[advertisingQ]" value="<%=work.avertisingQ%>">
+                <datalist id="qlist">
+                    <option value="Q1">
+                        <option value="Q2">
+                            <option value="Q3">
+                                <option value="Q4">
+                </datalist>
+            </div> 
+        </div> 
+        <div class="col-sm-6">
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="advertisingY" class="form-label">Planned for Advertising (Y)</label>
+                <input class="form-control" list="ylist" id="advertisingY" name="work[advertisingY]" value="<%=work.avertisingY%>">
+                <datalist id="ylist">
+                    <option value="2024">
+                        <option value="2025">
+                            <option value="2026">
+                                <option value="2027">
+                                    <option value="2028">
+                                        <option value="2029">
+                                            <option value="2030">
+                </datalist>
+            </div>  
+    </div> 
+
+
+
+
+        </div> 
+
+
+        <div class="col-sm-6">
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="approach" class="form-label">Approach (market)</label>
+                <input class="form-control" list="listApproach" id="approach" name="work[approach]" value="<%=work.approach%>">
+                <datalist id="listApproach">
+                    <option value="National">
+                        <option value="International">
+                </datalist>
+            </div>  
+            </div>    
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="domesticPreference" class="form-label">Domestic Preference</label>
+                    <input class="form-control" list="listdomesticPreference" name="work[domesticPreference]" value="<%=work.domesticPreference%>">
+                    <datalist id="listdomesticPreference">
+                        <option value="Yes">
+                            <option value="No">
+                                <option value="N/A">
+                    </datalist>
+                </div>  
+                </div>
+
+       
+
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="lots">Sublots</label>
+            <input class="form-control" type="number" id="lots" name="work[lots]" value="<%=work.lots%>">
+        </div> 
+
+        
+
+        
+
+        <br>
+            <div class="mb-3">
+                <button class="btn btn-primary">Update Package</button>
+            </div>
+
+        
+    </form>
+
+</div>
+</div>

@@ -1,29 +1,55 @@
-<nav class="navbar sticky-top navbar-expand-lg" style="background-color: rgb(39, 55, 179,0.94)">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/" style="font-size: 18px; color:white">Home</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-           
-                <a class="nav-link" href="/products" style="font-size: 16px; color:white">Projects</a>
-                <a class="nav-link" href="/expressions" style="font-size: 16px; color:white">Goods Packages</a>
-                <a class="nav-link" href="/consultants" style="font-size: 16px; color:white">Consultancies</a>
-            </div>
 
-            <div class="navbar-nav ml-auto">
-                <% if(!currentUser) {%>
-                <a class="nav-link" href="/login" style="font-size: 16px; color:white"</a>Login</a>
-                <a class="nav-link" href="/register" style="font-size: 16px; color:white"</a>Register</a>
-                <% } else {%> <div class="mt-2" style="font-size: 16px; color:white"><%=currentUser.username%> - <%=currentUser.company%></div>
-                <a class="nav-link" href="/logout" style="font-size: 16px; color:white">Logout</a>
-                <% } %>
-            </div>
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+<div class="container-fluid">
+     
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 150px;">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/products">Projects</a>
+            </li>
+            <li class="nav-item">
+          
+            </li>
 
-        </div>
+            <li class="nav-item dropdown"; style="padding-left: 2em">
+                <div class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Packages
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/expressions" style="font-size: 16px; color:rgb(60, 62, 179)">Goods & NCS Packages</a></li>
+                    <li><a class="dropdown-item" href="/works" style="font-size: 16px; color:rgb(60, 62, 179)">Works Packages</a></li>
+                    <li><a class="dropdown-item" href="/consultants" style="font-size: 16px; color:rgb(60, 62, 179)">Consultancies</a></li>
+                </ul>
+            <li>
+
+            <li class="nav-item dropdown"; style="padding-left: 2em">
+                <div class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Market
+                </div>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/evaluations" style="font-size: 16px; color:rgb(60, 62, 179)">Market Response Goods & NCS</a></li>
+                    <li><a class="dropdown-item" href="/evaluationworks" style="font-size: 16px; color:rgb(60, 62, 179)">Market Response Works</a></li>
+                    <li><a class="dropdown-item" href="/evaluationcons" style="font-size: 16px; color:rgb(60, 62, 179)">Market Response Consultancies</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
-</nav>
 
+    <div class="nav-item">
+   
+                <% if(!currentUser) {%>
+                <a class="nav-link ml-auto" href="/login" style="font-size: 16px; color:rgb(60, 62, 179); padding-right: 1em;padding-left: 1em;">Login</a>
+                <a class="nav-link ml-auto" href="/register" style="font-size: 16px; color:rgb(60, 62, 179);padding-left: 1em; padding-left: 1em;">Register</a>
+                <% } else {%> <div class="mt-2" style="font-size: 16px; color:rgb(v)"><%=currentUser.username%>
+                <a class="nav-link ml-auto" href="/logout" style="font-size: 16px; color:rgb(60, 62, 179)">Logout</a>
+                <% } %>
+     
+    </div>
+    
+</div>
+</nav>
+  

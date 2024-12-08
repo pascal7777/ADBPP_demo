@@ -27,7 +27,7 @@
         
         <div class="mb-3 mt-3">
             <label class="form-label" for="value">Package Value</label>
-            <input class="form-control" type="text" id="value" name="consultant[value]" value="<%=consultant.value%>">
+            <input class="form-control" type="number" step=".01" id="value" name="consultant[value]" value="<%=consultant.value%>">
         </div> 
 
         <div class="mb-3 mt-3">
@@ -43,39 +43,31 @@
             </datalist>
         </div>   
        
-      
-        
-        
+
         <div class="mb-3 mt-3">
-            <label class="form-label" for="review">ADB Review</label>
-            <input class="form-control" type="text" id="review" name="consultant[review]" value="<%=consultant.review%>">
-        </div>  
-       
+            <label class="form-label" for="review" class="form-label">ADB Review</label>
+            <input class="form-control" list="listReview" id="review" name="consultant[review]" value="<%=consultant.review%>">
+            <datalist id="listReview">
+                <option value="Prior">
+                    <option value="Post (sample)">
+            </datalist>
+        </div>
       
         <div class="mb-3 mt-3">
             <label class="form-label" for="procedure">Procedure</label>
             <input class="form-control" type="text" id="procedure" name="consultant[procedure]" value="<%=consultant.procedure%>">
         </div>  
-        
-        <div class="mb-3 mt-3">
-            <label class="form-label" for="advertising">Advertising</label>
-            <input class="form-control" type="text" id="advertising" name="consultant[advertising]" value="<%=consultant.avertising%>">
-        </div> 
-        
-        <div class="mb-3 mt-3">
-            <label class="form-label" for="approach">Approach (market)</label>
-            <input class="form-control" type="text" id="approach" name="consultant[approach]" value="<%=consultant.approach%>">
-        </div> 
 
-        <div class="mb-3 mt-3">
-            <label class="form-label" for="contracts">Nr Contracts anticipated</label>
-            <input class="form-control" type="number" id="contracts" name="consultant[contracts]" value="<%=consultant.contracts%>">
-        </div> 
-
-        <div class="mb-3 mt-3">
-            <label class="form-label" for="contractValue">Contract Value (sum) (if awarded)</label>
-            <input class="form-control" type="number" id="contractValue" name="consultant[contractValue]" value="<%=consultant.contractValue%>">
-        </div> 
+        <div class="col-sm-6">
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="approach" class="form-label">Approach (market)</label>
+                <input class="form-control" list="listApproach" id="approach" name="approach" value="<%=consultant.approach%>">
+                <datalist id="listApproach">
+                    <option value="National">
+                        <option value="International">
+                </datalist>
+            </div>  
+            </div> 
 
         <br>
             <div class="mb-3">

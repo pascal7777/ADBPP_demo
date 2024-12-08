@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
-
+const { expressionSchema } = require('../schemas.js');
 const { evaluationSchema } = require('../schemas.js');
 
-const ExpressError = require('../utils/ExpressError');
 
+const ExpressError = require('../utils/ExpressError');
+const Product = require('../models/product');
+const Expression = require('../models/expression');
 const Evaluation = require('../models/evaluation');
 
 
@@ -19,14 +21,16 @@ const validateEvaluation = (req, res, next) => {
     }
 }
 
-router.post('/', validateEvaluation, catchAsync(async (req, res) => {
-    const expression = await Expression.findById(req.params.id);
-    const evaluation = new Evaluation(req.body.evaluation );
-    expression.evaluations.push(evaluation );
-    await evaluation.save();
-    await expression.save();
-    res.redirect(`/expressions/${expression._id}`);
-}))
+router.get('/', catchAsync(async (req, res) => {
+    const evaluations = await Evaluation.find({}).populate('expression').populate ('author');
+    res.render('evaluations/index', { evaluations })
+    console.log(evaluations);
+}));
+
+
+
+
+
 
 router.delete('/:evaluationId', catchAsync(async (req, res) => {
     const { id, evaluationId } = req.params;

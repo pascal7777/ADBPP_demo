@@ -5,7 +5,7 @@
 
     <div class="col-8 offset-3">
 
-    <h1 class="text-center">Add a Procurement Plan</h1>
+    <h1 class="text-center">Add a Project</h1>
     <br>
         <form action="/products" method="POST" novalidate class = "validated-form">
    
@@ -106,7 +106,7 @@
 
             <div class="mb-3 mt-3">
                 <label class="form-label" for="financing">Project Financing (Million $US)</label>
-                <input class="form-control"  type="decimal" id="financing" name="product[financing]">
+                <input class="form-control"  type="number" step=".01" id="financing" name="product[financing]">
             </div>
 
             <div class="mb-3 mt-3">
@@ -117,21 +117,59 @@
 
             <div class="mb-3 mt-3">
                 <label class="form-label" for="planValue">Procurement Plan Value (Million $US)</label>
-                <input class="form-control" type="decimal" id="planValue" name="product[planValue]">
+                <input class="form-control" type="number" step=".01" id="planValue" name="product[planValue]">
             </div>
 
             <div class="mb-3 mt-3">
-                <label class="form-label" for="methods">Procurement Methods (Goods, Works, NCS)</label>
-                <div style="font-size: 12px"><span style="color:rgb(119, 119, 121)">Describe methods used for Goods, Works and nonconsulting services</div>
-                <textarea class="form-control" id="methods" name="product[methods]" rows="4"></textarea>
+                <label class="form-label" for="methods">Procurement Methods (Goods, Works, NCS)
+                    <div style="font-size: 12px"><span style="color:rgb(119, 119, 121)">Select procurement methods used in this project
+                    </div>
+                </label>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ocb" name="product[methods]" value=" OCB ">
+                    <label class="form-check-label" for="ocb"> OCB </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="rfqL" name="product[methods]" value=" RFQ_limited ">
+                    <label class="form-check-label" for="rfqL"> RFQ_limited </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="rfqP" name="product[methods]" value=" RFQ_public ">
+                    <label class="form-check-label" for="rfqP"> RFQ_public </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="dc" name="product[methods]" value=" DC ">
+                    <label class="form-check-label" for="dc"> DC (Single Source) </label>
+                </div>
             </div>
-
+            
             <div class="mb-3 mt-3">
-                <label class="form-label" for="methodsCS">Procurement Methods (Consultancies)</label>
-                <div style="font-size: 12px"><span style="color:rgb(119, 119, 121)">Describe methods used for Consulting Services</div>
-                <textarea class="form-control" id="methodsCS" name="product[methodsCS]" rows="4"></textarea>
+                <label class="form-label" for="methodsCS">Procurement Methods (Consultancies)
+                    <div style="font-size: 12px"><span style="color:rgb(119, 119, 121)">Select the selection methods used in this project
+                    </div>
+                </label>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="qcbs" name="product[methodsCS]" value=" OCBS ">
+                    <label class="form-check-label" for="qcbs"> OCBS (EOI/RFP)</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="cqs" name="product[methodsCS]" value=" CQS ">
+                    <label class="form-check-label" for="cqs"> CQS </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="lcs" name="product[methodsCS]" value=" LCS ">
+                    <label class="form-check-label" for="lcs"> LCS </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ics" name="product[methodsCS]" value=" ICS ">
+                    <label class="form-check-label" for="ics"> ICS </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="direct" name="product[methodsCS]" value=" DIRECT ">
+                    <label class="form-check-label" for="direct"> Direct Selection </label>
+                </div>
             </div>
-
+           
             <div class="mb-3 mt-3">
                 <label class="form-label" for="effective">Project Effective Date</label>
                 <input class="form-control" type="date" id="effective" name="product[effective]" required >

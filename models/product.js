@@ -35,10 +35,10 @@ const productSchema = new Schema({
         type: Date
     }, 
     methods: {
-        type: String
+        type: [String]
     },
     methodsCS: {
-        type: String
+        type: [String]
     },
     comments: {
         type: String
@@ -59,6 +59,12 @@ const productSchema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: 'Expression'
+        }
+    ],
+    works: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Work'
         }
     ],
     consultants: [

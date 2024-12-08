@@ -12,9 +12,12 @@ const flash = require('connect-flash');
 
 const Product = require('./models/product');
 const Expression = require('./models/expression');
+const Work = require('./models/work');
 const Consultant = require('./models/consultant');
-// const comments = require('./models/comment');
-// const evaluations = require('./models/evaluation');
+const Comments = require('./models/comment');
+const Evaluations = require('./models/evaluation');
+const Evaluationworks = require('./models/evaluationwork');
+const Evaluationcons = require('./models/evaluationcon');
 const User = require('./models/user');
 const { isLoggedIn } = require('./middleware');
 
@@ -33,7 +36,11 @@ const LocalStrategy = require('passport-local');
 const userRoutes = require('./routes/users');
 const productRoutes = require('./routes/products');
 const expressionRoutes = require('./routes/expressions');
+const workRoutes = require('./routes/works');
 const consultantRoutes = require('./routes/consultants');
+const evaluationRoutes = require('./routes/evaluations');
+const evaluationworkRoutes = require('./routes/evaluationworks');
+const evaluationconRoutes = require('./routes/evaluationcons');
 const { constants } = require('buffer');
 
 const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/procplan'
@@ -104,7 +111,11 @@ app.use('/', userRoutes);
 app.use('/products', productRoutes)
 
 app.use('/expressions', expressionRoutes)
+app.use('/works', workRoutes)
 app.use('/consultants', consultantRoutes)
+app.use('/evaluations', evaluationRoutes)
+app.use('/evaluationworks', evaluationworkRoutes)
+app.use('/evaluationcons', evaluationconRoutes)
 
 app.locals.moment = require('moment');
 
@@ -113,11 +124,16 @@ app.get('/', (req,res) => {
     res.render('home')
 });
 
-
 app.get('/products/:id/expressions/new', isLoggedIn, catchAsync(async (req,res) => {
     const {id} = req.params;
     const product = await Product.findById(id);
     res.render('expressions/new',{product})
+}));
+
+app.get('/products/:id/works/new', isLoggedIn, catchAsync(async (req,res) => {
+    const {id} = req.params;
+    const product = await Product.findById(id);
+    res.render('works/new',{product})
 }));
 
 app.get('/products/:id/consultants/new', isLoggedIn, catchAsync(async (req,res) => {
@@ -125,6 +141,9 @@ app.get('/products/:id/consultants/new', isLoggedIn, catchAsync(async (req,res) 
     const product = await Product.findById(id);
     res.render('consultants/new',{product})
 }));
+
+
+
 
 app.post('/products/:id/expressions/',   upload.array('image'), isLoggedIn, catchAsync(async(req,res) => {
     const { id } = req.params;
@@ -141,6 +160,24 @@ app.post('/products/:id/expressions/',   upload.array('image'), isLoggedIn, catc
     res.redirect(`/products/${id}`)
 }))
 
+
+app.post('/products/:id/works/',   upload.array('image'), isLoggedIn, catchAsync(async(req,res) => {
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    const {number, description, value, method, sbd, review, procedure, advertisingQ, advertisingY, deadline, advertised, approach, domesticPreference, lots, subLots, lot1q, lot1v, lot2q, lot2v, lot3q, lot3v, contracts, contractName, contractType, contractSum, contractDate, contractName2, contractType2, contractSum2, contractDate2,  contractName3, contractType3, contractSum3, contractDate3, status} = req.body;
+    const work = new Work ({number, description, value, method, sbd, review, procedure, advertisingQ, advertisingY, deadline, advertised, approach, domesticPreference, lots, subLots, lot1q, lot1v, lot2q, lot2v, lot3q, lot3v, contracts, contractName, contractType, contractSum, contractDate, contractName2, contractType2, contractSum2, contractDate2, contractName3, contractType3, contractSum3, contractDate3, status});
+    product.works.push(work);
+    work.product = product;
+    work.author = req.user._id;
+    work.editor = req.user._id;
+    await product.save();
+    await work.save();
+    console.log (work)
+    res.redirect(`/products/${id}`)
+}))
+
+
+
 app.post('/products/:id/consultants/',   upload.array('image'), isLoggedIn, catchAsync(async(req,res) => {
     const { id } = req.params;
     const product = await Product.findById(id);
@@ -155,6 +192,8 @@ app.post('/products/:id/consultants/',   upload.array('image'), isLoggedIn, catc
     console.log (consultant)
     res.redirect(`/products/${id}`)
 }))
+
+
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))

@@ -18,7 +18,7 @@ const validateProduct = (req, res, next) => {
 }
 
 router.get('/', async (req, res) => {
-    const products = await Product.find({}).populate('expressions').populate('consultants');
+    const products = await Product.find({}).populate('expressions').populate('works').populate('consultants');
     res.render('products/index', { products })
 });
 
@@ -77,7 +77,7 @@ router.put('/:id', isLoggedIn, catchAsync(async (req, res ) => {
 
 
 router.get('/:id', catchAsync(async (req, res,) => {
-    const product = await Product.findById(req.params.id).populate('expressions').populate('consultants').populate('author').populate('editor');
+    const product = await Product.findById(req.params.id).populate('expressions').populate('consultants').populate('works').populate('author').populate('editor');
     if (!product) {
         req.flash('error', 'this plan was deleted');
         return res.redirect('/products');
