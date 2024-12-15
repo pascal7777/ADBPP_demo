@@ -115,6 +115,15 @@ router.get('/:id/subLots', catchAsync(async (req, res) => {
     res.render('works/subLots', { work});
 }))
 
+router.get('/:id/bidOpening', catchAsync(async (req, res) => {
+    const work= await Work.findById(req.params.id).populate('product');
+    if (!work) {
+        req.flash('error', 'This Package was deleted');
+        return res.redirect('/works');
+    }
+    res.render('works/bidOpening', { work});
+}))
+
 router.get('/:id/contractSum', catchAsync(async (req, res) => {
     const work= await Work.findById(req.params.id).populate('product');
     if (!work) {

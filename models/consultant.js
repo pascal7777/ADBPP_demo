@@ -56,11 +56,59 @@ const consultantSchema = new Schema({
     lots:{
         type: Number
     },
+    bidders:{
+        type: Number,
+    },
     subLots:{
         type: String
     },
     advertised:{
         type: Date
+    },
+    bidOpeningN1:{
+        type: String
+    },
+    bidOpeningV1:{
+        type: Number
+    },
+    bidOpeningN2:{
+        type: String
+    },
+    bidOpeningV2:{
+        type: Number
+    },
+    bidOpeningN3:{
+        type: String
+    },
+    bidOpeningV3:{
+        type: Number
+    },
+    bidOpeningN4:{
+        type: String
+    },
+    bidOpeningV4:{
+        type: Number
+    },
+    bidOpeningL4:{
+        type: Number
+    },
+    bidOpeningN5:{
+        type: String
+    },
+    bidOpeningV5:{
+        type: Number
+    },
+    bidOpeningL5:{
+        type: Number
+    },
+    bidOpeningN6:{
+        type: String
+    },
+    bidOpeningV6:{
+        type: Number
+    },
+    bidOpeningL6:{
+        type: Number
     },
     deadline:{
         type: Date

@@ -3,7 +3,7 @@
 <div class="container mt-3">
     
    
-    <form action="/expressions/<%=expression._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+    <form action="/works/<%=work._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
 
     <div class="row"> 
         <hr>
@@ -12,22 +12,21 @@
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                     <label class="form-label" for="contractDate">Contract Date</label>
-                    <input class="form-control" type="date" id="contractDate" name="expression[contractDate]" value="<%=expression.contractDate%>" required>
+                    <input class="form-control" type="date" id="contractDate" name="work[contractDate]" value="<%=work.contractDate%>" required>
                 </div>
             </div>
         
-
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                     <label class="form-label" for="contractComp">Contractor (Company) </label>
-                    <input class="form-control" type="string" id="contractComp" name="expression[contractComp]" value="<%=expression.contractComp%>" required>
+                    <input class="form-control" type="string" id="contractComp" name="work[contractComp]" value="<%=work.contractComp%>" required>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                     <label class="form-label" for="contractName">Contract Name </label>
-                    <input class="form-control" type="string" id="contractName" name="expression[contractName]" value="<%=expression.contractName%>" required>
+                    <input class="form-control" type="string" id="contractName" name="work[contractName]" value="<%=work.contractName%>" required>
                 </div>
             </div>
         
@@ -35,7 +34,7 @@
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                         <label class="form-label" for="contractSum">Contract Sum (US$)</label>
-                        <input class="form-control" type="number" id="contractSum" name="expression[contractSum]" value="<%=expression.contractSum%>" required>
+                        <input class="form-control" type="number" id="contractSum" name="work[contractSum]" value="<%=work.contractSum%>" required>
                 </div>
             </div>
 
@@ -43,7 +42,7 @@
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                 <label class="form-label" for="contractType" class="form-label">Contract Type</label>
-                <input class="form-control" list="contracts" id="contractType" name="expression[contractType]" required>
+                <input class="form-control" list="contracts" id="contractType" name="work[contractType]" required>
                 <datalist id="contracts">
                     <option value="Supply of Goods">
                     <option value="Time based">
@@ -65,21 +64,22 @@
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                     <label class="form-label" for="contractDate2">Contract Date</label>
-                    <input class="form-control" type="date" id="contractDate2" name="expression[contractDate2]" value="<%=expression.contractDate2%>" required>
+                    <input class="form-control" type="date" id="contractDate2" name="work[contractDate2]" value="<%=work.contractDate2%>" required>
                 </div>
             </div>
         
+
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                     <label class="form-label" for="contractComp2">Contractor (Company) </label>
-                    <input class="form-control" type="string" id="contractComp2" name="expression[contractComp2]" value="<%=expression.contractComp2%>" required>
+                    <input class="form-control" type="string" id="contractComp2" name="work[contractComp2]" value="<%=work.contractComp2%>" required>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                     <label class="form-label" for="contractName2">Contract Name </label>
-                    <input class="form-control" type="string" id="contractName2" name="expression[contractName2]" value="<%=expression.contractName2%>" required>
+                    <input class="form-control" type="string" id="contractName2" name="work[contractName2]" value="<%=work.contractName2%>" required>
                 </div>
             </div>
         
@@ -87,7 +87,7 @@
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                         <label class="form-label" for="contractSum2">Contract Sum (US$)</label>
-                        <input class="form-control" type="number" id="contractSum2" name="expression[contractSum2]" value="<%=expression.contractSum2%>" required>
+                        <input class="form-control" type="number" id="contractSum2" name="work[contractSum2]" value="<%=work.contractSum2%>" required>
                 </div>
             </div>
 
@@ -95,7 +95,7 @@
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                 <label class="form-label" for="contractType2" class="form-label">Contract Type</label>
-                <input class="form-control" list="contracts" id="contractType2" name="expression[contractType2]" required>
+                <input class="form-control" list="contracts" id="contractType2" name="work[contractType2]" required>
                 <datalist id="contracts">
                     <option value="Supply of Goods">
                     <option value="Time based">
@@ -112,21 +112,21 @@
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                     <label class="form-label" for="contractDate3">Contract Date</label>
-                    <input class="form-control" type="date" id="contractDate3" name="expression[contractDate3]" value="<%=expression.contractDate3%>" required>
-                </div>
-            </div>
-        
-            <div class="col-sm-4">
-                <div class="mb-3 mt-3">
-                    <label class="form-label" for="contractComp3">Contractor (Company) </label>
-                    <input class="form-control" type="string" id="contractComp3" name="expression[contractComp3]" value="<%=expression.contractComp3%>" required>
+                    <input class="form-control" type="date" id="contractDate3" name="work[contractDate3]" value="<%=work.contractDate3%>" required>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
+                    <label class="form-label" for="contractComp3">Contractor (Company) </label>
+                    <input class="form-control" type="string" id="contractComp3" name="work[contractComp3]" value="<%=work.contractComp3%>" required>
+                </div>
+            </div>
+        
+            <div class="col-sm-4">
+                <div class="mb-3 mt-3">
                     <label class="form-label" for="contractName3">Contract Name </label>
-                    <input class="form-control" type="string" id="contractName3" name="expression[contractName3]" value="<%=expression.contractName3%>" required>
+                    <input class="form-control" type="string" id="contractName3" name="work[contractName3]" value="<%=work.contractName3%>" required>
                 </div>
             </div>
         
@@ -134,7 +134,7 @@
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                         <label class="form-label" for="contractSum3">Contract Sum (US$)</label>
-                        <input class="form-control" type="number" id="contractSum3" name="expression[contractSum3]" value="<%=expression.contractSum3%>" required>
+                        <input class="form-control" type="number" id="contractSum3" name="work[contractSum3]" value="<%=work.contractSum3%>" required>
                 </div>
             </div>
 
@@ -142,7 +142,7 @@
             <div class="col-sm-4">
                 <div class="mb-3 mt-3">
                 <label class="form-label" for="contractType3" class="form-label">Contract Type</label>
-                <input class="form-control" list="contracts" id="contractType3" name="expression[contractType3]" required>
+                <input class="form-control" list="contracts" id="contractType3" name="work[contractType3]" required>
                 <datalist id="contracts">
                     <option value="Supply of Goods">
                     <option value="Time based">

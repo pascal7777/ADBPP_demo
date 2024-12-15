@@ -148,12 +148,13 @@
             </div>
         </div>
 
-    <!-- Package Details --> 
-        <div class="col-sm-6">
-        <div class="card">
+    
+<div class="col-sm-6">
+    <div class="card">
         <div class="card-body">
-
-    <div class="row">   
+            
+            <!-- Package Details --> 
+            <div class="row">   
             <div class="col-sm-12">      
                 <% if(expression.lots===1) {%>
                     <div class="accordion" id="accordionExample">
@@ -162,7 +163,7 @@
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <%  if( expression.lots.length===0)  {%>
                             <% } else{ %> 
-                                Package Details (<%=expression.lots%> lots)    
+                                Package Details: (<%=expression.lots%> lots)    
                             <% } %> 
                         </button>
                         </h2>
@@ -194,7 +195,7 @@
                            
                         <%  if( expression.lots.length===0)  {%>
                             <% } else{ %> 
-                                Package Details (<%=expression.lots%> lots)   
+                                Package Details: (<%=expression.lots%> lots)   
                         <% } %> 
                         
                         </button>
@@ -234,7 +235,7 @@
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             <%  if( expression.lots.length===0)  {%>
                                 <% } else{ %> 
-                                          Package Details (<%=expression.lots%> lots)
+                                          Package Details: (<%=expression.lots%> lots)
                                 <% } %> 
                         </button>
                         </h2>
@@ -272,13 +273,13 @@
                     </div>
                 <% } %> 
     </div>
-</div>
+            </div>
 
- 
-<br>
-<!-- Advertising Details for Advertising--> 
-<% if(expression.status==="Advertised") {%>
-    <div class="accordion" id="accordionExample">
+            <br>
+
+            <!-- Advertising Details for Advertising--> 
+            <% if(expression.status==="Advertised") {%>
+            <div class="accordion" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -300,40 +301,273 @@
         </div>
         </div>
     </div>  
-    </div>
-<% } %> 
-<br>
-<!-- Advertising Details for Evaluation--> 
-<% if(expression.status==="Evaluation") {%>
-    <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            Advertising details
-                            </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <ul>
-                                    <% if(expression.advertised!=null) {%>
-                                    <li>BD Advertised/issued on:  <%=expression.advertised.toDateString()%>
-                                    </li>
-                                    <li>Bid Submission Deadline on:  <%=expression.deadline.toDateString()%>
-                                    </li>
+            </div>
+            <% } %> 
+
+            <br>
+          
+            <!-- Bid Details for Evaluation--> 
+            <% if(expression.status==="Evaluation") {%> 
+            <div class="row">   
+            <div class="col-sm-12">      
+                <% if(expression.evaluations.length===1) {%>
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <%  if( expression.evaluations.length===0)  {%>
+                            <% } else{ %> 
+                                Bid Opening Details: (<%=expression.evaluations.length%> bidders)    
+                            <% } %> 
+                        </button>
+                        </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul>
+                                <% if(expression.bidOpeningN1!=null) {%>
+                                    <li> 
+                                    Bidder 1: <%=expression.bidOpeningN1%>;    
+                                    bid value: US$ <%=expression.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    <% if(expression.lots>1) {%>
+                                    for <%=expression.bidOpeningL1%> lots
                                     <% } %> 
-                                </ul>  
-                                <span style="color:rgb(119, 119, 121); font-size: 1em"> <em>Nr days = <%=((expression.deadline - expression.advertised) / (1000 * 60 * 60 * 24))%></em></span>
-                            <p><a href="/expressions/<%=expression._id%>/advertising">Edit</a></p>
-                               
-                        </div>
-                        </div>
-                        </div>  
-    </div>
-<% } %> 
-<br>
-<!-- Contract Details --> 
-<% if(expression.status==="Awarded") {%>
-    <div class="accordion" id="accordionExample">
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV1 - expression.value)%>)</em></span>
+                                    <% } %> 
+                        </ul>  
+                        <br>
+            <% if 
+            (currentUser && expression.author.equals(currentUser._id) || currentUser &&
+            currentUser.isAdmin || currentUser && currentUser.isADB)
+            {%>
+                                    <p><a href="/expressions/<%=expression._id%>/bidOpening">Edit</a></p>
+            <% } %>
+                
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <% } %> 
+
+                <% if(expression.evaluations.length===2) {%>
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                           
+                        <%  if( expression.evaluations.length===0)  {%>
+                            <% } else{ %> 
+                                Bid Opening Details: (<%=expression.evaluations.length%> bidders)   
+                        <% } %> 
+                        
+                        </button>
+                        </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                            <ul>
+                                <% if(expression.bidOpeningN1!=null) {%>
+                                    <li> 
+                                    Bidder 1: <%=expression.bidOpeningN1%>;    
+                                    bid value: US$ <%=expression.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    <% if(expression.lots>1) {%>
+                                    for <%=expression.bidOpeningL1%> lots
+                                    <% } %> 
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV1 - expression.value)%>)</em></span>
+                                    <% } %> 
+                                    <% if(expression.bidOpeningN2!=null) {%>
+                                    <li> 
+                                    Bidder 2: <%=expression.bidOpeningN2%>;
+                                    bid value: US$ <%=expression.bidOpeningV2.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    <% if(expression.lots>1) {%>
+                                    for <%=expression.bidOpeningL2%> lots
+                                    <% } %>     
+                                </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV2 - expression.value)%>)</em></span>
+                                    <% } %> 
+                            </ul>  
+                            <br>
+                            <% if  (currentUser && expression.author.equals(currentUser._id) || currentUser &&
+                            currentUser.isAdmin || currentUser && currentUser.isADB)
+                            {%>
+                                    <p><a href="/expressions/<%=expression._id%>/bidOpening">Edit</a></p>
+                                    <% } %>
+                
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <% } %> 
+
+                <% if(expression.evaluations.length===3) {%>
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <%  if( expression.evaluations.length===0)  {%>
+                                <% } else{ %> 
+                                          Bid Opening Details (<%=expression.evaluations.length%> bidders)
+                                <% } %> 
+                        </button>
+                        </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                            <ul>
+                                <% if(expression.bidOpeningN1!=null) {%>
+                                    <li> 
+                                    Bidder 1: <%=expression.bidOpeningN1%>;    
+                                    bid value: US$ <%=expression.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    <% if(expression.lots>1) {%>
+                                        for <%=expression.bidOpeningL1%> lots
+                                        <% } %>   
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV1 - expression.value)%>)</em></span>
+                                    <% } %> 
+                              
+                                    <% if(expression.bidOpeningN2!=null) {%>
+                                    <li> 
+                                    Bidder 2: <%=expression.bidOpeningN2%>;
+                                    bid value: US$ <%=expression.bidOpeningV2.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    <% if(expression.lots>1) {%>
+                                        for <%=expression.bidOpeningL2%> lots
+                                        <% } %> 
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV2 - expression.value)%>)</em></span>
+                                    <% } %> 
+                                        
+                                    <% if(expression.bidOpeningN3!=null) {%>
+                                        <li>
+                                    Bidder 3: <%=expression.bidOpeningN3%>;
+                                    bid value: US$ <%=expression.bidOpeningV3.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                    <% if(expression.lots>1) {%>
+                                        for <%=expression.bidOpeningL3%> lots
+                                        <% } %> 
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV3 - expression.value)%>)</em></span>
+                                    <% } %> 
+                            <br>
+                            <% if  (currentUser && expression.author.equals(currentUser._id) || currentUser &&
+                            currentUser.isAdmin || currentUser && currentUser.isADB)
+                            {%>
+                                    <p><a href="/expressions/<%=expression._id%>/bidOpening">Edit</a></p>
+                                    <% } %>
+                
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <% } %> 
+
+                <% if(expression.evaluations.length>3) {%>
+                    <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <%  if( expression.evaluations.length===0)  {%>
+                                <% } else{ %> 
+                                          Bid Opening Details (<%=expression.evaluations.length%> bidders)
+                                <% } %> 
+                        </button>
+                        </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                            <ul>
+                                <% if(expression.bidOpeningN1!=null) {%>
+                                    <li> 
+                                Bidder 1: <%=expression.bidOpeningN1%>;    
+                                    bid value: US$ <%=expression.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    <% if(expression.lots>1) {%>
+                                        for <%=expression.bidOpeningL1%> lots
+                                        <% } %>   
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV1 - expression.value)%>)</em></span>
+                                    <% } %> 
+                              
+                                    <% if(expression.bidOpeningN2!=null) {%>
+                                    <li> 
+                                Bidder 2: <%=expression.bidOpeningN2%>;
+                                    bid value: US$ <%=expression.bidOpeningV2.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                                    <% if(expression.lots>1) {%>
+                                        for <%=expression.bidOpeningL2%> lots
+                                        <% } %> 
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV2 - expression.value)%>)</em></span>
+                                    <% } %> 
+                                        
+                                    <% if(expression.bidOpeningN3!=null) {%>
+                                        <li>
+                                Bidder 3: <%=expression.bidOpeningN3%>;
+                                    bid value: US$ <%=expression.bidOpeningV3.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                    <% if(expression.lots>1) {%>
+                                        for <%=expression.bidOpeningL3%> lots
+                                        <% } %> 
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV3 - expression.value)%>)</em></span>
+                                    <% } %> 
+                                    <% if(expression.bidOpeningN4!=null) {%>
+                                        <li>
+                                Bidder 4: <%=expression.bidOpeningN4%>;
+                                    bid value: US$ <%=expression.bidOpeningV4.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                    <% if(expression.lots>1) {%>
+                                        for <%=expression.bidOpeningL4%> lots
+                                        <% } %> 
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV4 - expression.value)%>)</em></span>
+                                    <% } %> 
+                                    <% if(expression.bidOpeningN5!=null) {%>
+                                        <li>
+                                Bidder 5: <%=expression.bidOpeningN5%>;
+                                    bid value: US$ <%=expression.bidOpeningV5.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                    <% if(expression.lots>1) {%>
+                                        for <%=expression.bidOpeningL5%> lots
+                                        <% } %> 
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV5 - expression.value)%>)</em></span>
+                                    <% } %> 
+                                    <% if(expression.bidOpeningN6!=null) {%>
+                                        <li>
+                                Bidder 6: <%=expression.bidOpeningN6%>;
+                                    bid value: US$ <%=expression.bidOpeningV6.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                                    <% if(expression.lots>1) {%>
+                                        for <%=expression.bidOpeningL6%> lots
+                                        <% } %> 
+                                    </li>
+                                    <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                        (variance = US$ <%=(expression.bidOpeningV6 - expression.value)%>)</em></span>
+                                    <% } %> 
+
+                            <br>
+                            <% if  (currentUser && expression.author.equals(currentUser._id) || currentUser &&
+                            currentUser.isAdmin || currentUser && currentUser.isADB)
+                            {%>
+                                    <p><a href="/expressions/<%=expression._id%>/bidOpening">Edit</a></p>
+                                    <% } %>
+                
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                <% } %> 
+            </div>
+            </div>
+            <% } %> 
+
+            <br>
+
+            <!-- Contract Details --> 
+            <% if(expression.status==="Awarded") {%>
+            <div class="accordion" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
@@ -353,9 +587,15 @@
                                         </li>
                                 <% } %> 
                             
+                                <% if(expression.contractComp!=null) {%>
+                                    <li> 
+                                    Contractor: <%=expression.contractComp%>
+                                    </li>
+                                <% } %> 
+
                                 <% if(expression.contractName!=null) {%>
                                         <li> 
-                                        Name: <%=expression.contractName%>
+                                    Contract Name: <%=expression.contractName%>
                                         </li>
                                 <% } %> 
 
@@ -384,9 +624,15 @@
                                             </li>
                                     <% } %> 
                                 
+                                    <% if(expression.contractComp!=null) {%>
+                                        <li> 
+                                        Contractor: <%=expression.contractComp%>
+                                        </li>
+                                    <% } %> 
+
                                     <% if(expression.contractName!=null) {%>
                                             <li> 
-                                            Name: <%=expression.contractName%>
+                                        Contract Name: <%=expression.contractName%>
                                             </li>
                                     <% } %> 
                     
@@ -414,9 +660,15 @@
                                             </li>
                                     <% } %> 
                                 
+                                    <% if(expression.contractComp2!=null) {%>
+                                        <li> 
+                                        Contractor: <%=expression.contractComp2%>
+                                        </li>
+                                    <% } %> 
+
                                     <% if(expression.contractName2!=null) {%>
                                             <li> 
-                                            Name: <%=expression.contractName2%>
+                                        Contract Name: <%=expression.contractName2%>
                                             </li>
                                     <% } %> 
                     
@@ -445,9 +697,15 @@
                                             </li>
                                     <% } %> 
                                 
+                                    <% if(expression.contractComp!=null) {%>
+                                        <li> 
+                                        Contractor: <%=expression.contractComp%>
+                                        </li>
+                                    <% } %> 
+
                                     <% if(expression.contractName!=null) {%>
                                             <li> 
-                                            Name: <%=expression.contractName%>
+                                        Contract Name: <%=expression.contractName%>
                                             </li>
                                     <% } %> 
                     
@@ -475,9 +733,15 @@
                                             </li>
                                     <% } %> 
                                 
+                                    <% if(expression.contractComp2!=null) {%>
+                                        <li> 
+                                        Contractor: <%=expression.contractComp2%>
+                                        </li>
+                                    <% } %> 
+
                                     <% if(expression.contractName2!=null) {%>
                                             <li> 
-                                            Name: <%=expression.contractName2%>
+                                        Contract Name: <%=expression.contractName2%>
                                             </li>
                                     <% } %> 
                     
@@ -505,9 +769,15 @@
                                             </li>
                                     <% } %> 
                                 
+                                    <% if(expression.contractComp3!=null) {%>
+                                        <li> 
+                                        Contractor: <%=expression.contractComp3%>
+                                        </li>
+                                    <% } %> 
+
                                     <% if(expression.contractName3!=null) {%>
                                             <li> 
-                                            Name: <%=expression.contractName3%>
+                                        Contract Name: <%=expression.contractName3%>
                                             </li>
                                     <% } %> 
                     
@@ -529,17 +799,14 @@
                         <br>
 
                         <span style="color:rgb(119, 119, 121); font-size: 1em"> TotalValue = US$ <%=(expression.contractSum + expression.contractSum2 + expression.contractSum3).toLocaleString(undefined, { minimumFractionDigits: 0 })%>
-                        <em>(variance = US$ <%=((expression.lot1v + expression.lot2v + expression.lot3v) - (expression.contractSum + expression.contractSum2 + expression.contractSum3))%>)</em></span>
+                        <em>(variance = US$ <%=((expression.contractSum + expression.contractSum2+ expression.contractSum3) - (expression.value)).toLocaleString(undefined, { minimumFractionDigits: 0 })%>)</em></span>
                         <p><a href="/expressions/<%=expression._id%>/contractSum">Edit</a></p>
 
                     </div> 
                 </div> 
             </div> 
-    </div> 
-<% } %> 
-
-
-
+            </div> 
+            <% } %> 
 
 </div> 
 
@@ -548,7 +815,11 @@
     <span style="color:rgb(162, 164, 165)">
     
     
-    <% if(expression.status === "Scheduled") {%>
+        <% if  ((currentUser && expression.author.equals(currentUser._id) || currentUser &&
+        currentUser.isAdmin || currentUser && currentUser.isADB) 
+        & 
+        (expression.status==="Scheduled"))
+        {%>
             <div class="row">
                 <div class="col-6">
             <p> <a class="btn btn-sm btn-warning" href="/expressions/<%=expression._id%>/edit">Edit</a></p>
@@ -568,7 +839,7 @@
 <div class="row">
 
     <!-- Submit EOI -->
-
+    <% if(expression.status==="Scheduled" || expression.status==="Advertised" ) {%>
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
@@ -576,20 +847,17 @@
             <p><span style="color:rgb(119, 119, 121); font-size: 0.8em"> Expression Interest at this stage is fully non-committal (for information only). However bidders are informed that as part of a formal bid you will be asked to provide one or more similar contracts concluded in the past 3 years of a value around <strong>US$ <%= (expression.value*0.8).toLocaleString(undefined, { minimumFractionDigits: 0 })%></strong>, or more and demonstrate having an annual turnover of at least <strong>US$ <%= (expression.value*1.25).toLocaleString(undefined, { minimumFractionDigits: 0 })%> </strong> (average) measured over past 3 years.</span></p>  
             <p><a class="btn btn-sm btn-primary" href="/expressions/<%=expression._id%>/evaluations/new">Add a new EOI</a> </p>      
                 <% for(let evaluation of expression.evaluations) {%>
-                        
                         <ul>
                         <li>
                             <p style="font-size: .8em"> <span style="color:rgb(119, 119, 121)"><%=evaluation.company%> - <%=evaluation.country%> <span style="color:rgb(186, 186, 189)"><em>(submitted by: <%=evaluation.author.username%>, on  <%=evaluation.createdAt.toDateString()%>)</em></span></span></p>
                         </li>
                         </ul>
-                      
-                        <% } %> 
-
-
-                    
+                <% } %>   
             </div>
         </div>
     </div>
+
+    <% } %>
 
     <!-- Scheduled OR Advertised EOIs (evaluations)--> 
     <!-- <% if(expression.status==="Scheduled" || expression.status==="Advertised" ) {%>  

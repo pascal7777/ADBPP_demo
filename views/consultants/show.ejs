@@ -303,34 +303,265 @@
     </div>
 <% } %> 
 <br>
-<!-- Advertising Details for Evaluation--> 
-<% if(consultant.status==="Evaluation") {%>
-    <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            Advertising details
-                            </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <ul>
-                                    <% if(consultant.advertised!=null) {%>
-                                    <li>BD Advertised/issued on:  <%=consultant.advertised.toDateString()%>
-                                    </li>
-                                    <li>Bid Submission Deadline on:  <%=consultant.deadline.toDateString()%>
-                                    </li>
-                                    <% } %> 
-                                </ul>  
-                                <span style="color:rgb(119, 119, 121); font-size: 1em"> <em>Nr days = <%=((consultant.deadline - consultant.advertised) / (1000 * 60 * 60 * 24))%></em></span>
-                            <p><a href="/consultants/<%=consultant._id%>/advertising">Edit</a></p>
-                               
-                        </div>
-                        </div>
-                        </div>  
+
+
+<!-- Bid Details for Evaluation--> 
+<% if(consultant.status==="Evaluation") {%> 
+    <div class="row">   
+    <div class="col-sm-12">      
+        <% if(consultant.evaluationcons.length===1) {%>
+            <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <%  if( consultant.evaluationcons.length===0)  {%>
+                    <% } else{ %> 
+                        Bid Opening Details: (<%=consultant.evaluationcons.length%> bidders)    
+                    <% } %> 
+                </button>
+                </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <ul>
+                        <% if(consultant.bidOpeningN1!=null) {%>
+                            <li> 
+                            Bidder 1: <%=consultant.bidOpeningN1%>;    
+                            bid value: US$ <%=consultant.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(consultant.lots>1) {%>
+                            for <%=consultant.bidOpeningL1%> lots
+                            <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV1 - consultant.value)%>)</em></span>
+                            <% } %> 
+                </ul>  
+                <br>
+    <% if 
+    (currentUser && consultant.author.equals(currentUser._id) || currentUser &&
+    currentUser.isAdmin || currentUser && currentUser.isADB)
+    {%>
+                            <p><a href="/consultants/<%=consultant._id%>/bidOpening">Edit</a></p>
+    <% } %>
+        
+            </div>
+            </div>
+            </div>
+            </div>
+        <% } %> 
+
+        <% if(consultant.evaluationcons.length===2) {%>
+            <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                   
+                <%  if( consultant.evaluationcons.length===0)  {%>
+                    <% } else{ %> 
+                        Bid Opening Details: (<%=consultant.evaluationcons.length%> bidders)   
+                <% } %> 
+                
+                </button>
+                </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                    <ul>
+                        <% if(consultant.bidOpeningN1!=null) {%>
+                            <li> 
+                            Bidder 1: <%=consultant.bidOpeningN1%>;    
+                            bid value: US$ <%=consultant.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(consultant.lots>1) {%>
+                            for <%=consultant.bidOpeningL1%> lots
+                            <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV1 - consultant.value)%>)</em></span>
+                            <% } %> 
+                            <% if(consultant.bidOpeningN2!=null) {%>
+                            <li> 
+                            Bidder 2: <%=consultant.bidOpeningN2%>;
+                            bid value: US$ <%=consultant.bidOpeningV2.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(consultant.lots>1) {%>
+                            for <%=consultant.bidOpeningL2%> lots
+                            <% } %>     
+                        </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV2 - consultant.value)%>)</em></span>
+                            <% } %> 
+                    </ul>  
+                    <br>
+                    <% if  (currentUser && consultant.author.equals(currentUser._id) || currentUser &&
+                    currentUser.isAdmin || currentUser && currentUser.isADB)
+                    {%>
+                            <p><a href="/consultants/<%=consultant._id%>/bidOpening">Edit</a></p>
+                            <% } %>
+        
+            </div>
+            </div>
+            </div>
+            </div>
+        <% } %> 
+
+        <% if(consultant.evaluationcons.length===3) {%>
+            <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <%  if( consultant.evaluationcons.length===0)  {%>
+                        <% } else{ %> 
+                                  Bid Opening Details (<%=consultant.evaluationcons.length%> bidders)
+                        <% } %> 
+                </button>
+                </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                    <ul>
+                        <% if(consultant.bidOpeningN1!=null) {%>
+                            <li> 
+                            Bidder 1: <%=consultant.bidOpeningN1%>;    
+                            bid value: US$ <%=consultant.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(consultant.lots>1) {%>
+                                for <%=consultant.bidOpeningL1%> lots
+                                <% } %>   
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV1 - consultant.value)%>)</em></span>
+                            <% } %> 
+                      
+                            <% if(consultant.bidOpeningN2!=null) {%>
+                            <li> 
+                            Bidder 2: <%=consultant.bidOpeningN2%>;
+                            bid value: US$ <%=consultant.bidOpeningV2.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(consultant.lots>1) {%>
+                                for <%=consultant.bidOpeningL2%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV2 - consultant.value)%>)</em></span>
+                            <% } %> 
+                                
+                            <% if(consultant.bidOpeningN3!=null) {%>
+                                <li>
+                            Bidder 3: <%=consultant.bidOpeningN3%>;
+                            bid value: US$ <%=consultant.bidOpeningV3.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(consultant.lots>1) {%>
+                                for <%=consultant.bidOpeningL3%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV3 - consultant.value)%>)</em></span>
+                            <% } %> 
+                    <br>
+                    <% if  (currentUser && consultant.author.equals(currentUser._id) || currentUser &&
+                    currentUser.isAdmin || currentUser && currentUser.isADB)
+                    {%>
+                            <p><a href="/consultants/<%=consultant._id%>/bidOpening">Edit</a></p>
+                            <% } %>
+        
+            </div>
+            </div>
+            </div>
+            </div>
+        <% } %> 
+
+        <% if(consultant.evaluationcons.length>3) {%>
+            <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <%  if( consultant.evaluationcons.length===0)  {%>
+                        <% } else{ %> 
+                                  Bid Opening Details (<%=consultant.evaluationcons.length%> bidders)
+                        <% } %> 
+                </button>
+                </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                    <ul>
+                        <% if(consultant.bidOpeningN1!=null) {%>
+                            <li> 
+                        Bidder 1: <%=consultant.bidOpeningN1%>;    
+                            bid value: US$ <%=consultant.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(consultant.lots>1) {%>
+                                for <%=consultant.bidOpeningL1%> lots
+                                <% } %>   
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV1 - consultant.value)%>)</em></span>
+                        <% } %> 
+                      
+                            <% if(consultant.bidOpeningN2!=null) {%>
+                            <li> 
+                        Bidder 2: <%=consultant.bidOpeningN2%>;
+                            bid value: US$ <%=consultant.bidOpeningV2.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(consultant.lots>1) {%>
+                                for <%=consultant.bidOpeningL2%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV2 - consultant.value)%>)</em></span>
+                        <% } %> 
+                            <% if(consultant.bidOpeningN3!=null) {%>
+                                <li>
+                        Bidder 3: <%=consultant.bidOpeningN3%>;
+                            bid value: US$ <%=consultant.idOpeningV3.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(consultant.lots>1) {%>
+                                for <%=consultant.bidOpeningL3%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV3 - consultant.value)%>)</em></span>
+                        <% } %> 
+                        <% if(consultant.bidOpeningN4!=null) {%>
+                            <li>
+                        Bidder 4: <%=consultant.bidOpeningN4%>;
+                            bid value: US$ <%=consultant.bidOpeningV4.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(consultant.lots>1) {%>
+                                for <%=consultant.bidOpeningL4%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV4 - consultant.value)%>)</em></span>
+                            <% } %> 
+                            <% if(consultant.bidOpeningN5!=null) {%>
+                                <li>
+                        Bidder 5: <%=consultant.bidOpeningN5%>;
+                            bid value: US$ <%=consultant.bidOpeningV5.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(consultant.lots>1) {%>
+                                for <%=consultant.bidOpeningL5%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV5 - consultant.value)%>)</em></span>
+                            <% } %> 
+                            <% if(consultant.bidOpeningN6!=null) {%>
+                                <li>
+                        Bidder 6: <%=consultant.bidOpeningN6%>;
+                            bid value: US$ <%=consultant.bidOpeningV6.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(consultant.lots>1) {%>
+                                for <%=consultant.bidOpeningL6%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(consultant.bidOpeningV6 - consultant.value)%>)</em></span>
+                            <% } %> 
+
+                    <br>
+                    <% if  (currentUser && consultant.author.equals(currentUser._id) || currentUser &&
+                    currentUser.isAdmin || currentUser && currentUser.isADB)
+                    {%>
+                            <p><a href="/consultants/<%=consultant._id%>/bidOpening">Edit</a></p>
+                    <% } %>
+        
+            </div>
+            </div>
+            </div>
+            </div>
+        <% } %> 
+   
     </div>
-<% } %> 
-<br>
+    </div>
+    <% } %> 
+
 <!-- Contract Details --> 
 <% if(consultant.status==="Awarded") {%>
     <div class="accordion" id="accordionExample">
@@ -529,8 +760,9 @@
                         <br>
 
                         <span style="color:rgb(119, 119, 121); font-size: 1em"> TotalValue = US$ <%=(consultant.contractSum + consultant.contractSum2 + consultant.contractSum3).toLocaleString(undefined, { minimumFractionDigits: 0 })%>
-                        <em>(variance = US$ <%=((consultant.lot1v + consultant.lot2v + consultant.lot3v) - (consultant.contractSum + consultant.contractSum2 + consultant.contractSum3))%>)</em></span>
-                        <p><a href="/consultants/<%=consultant._id%>/contractSum">Edit</a></p>
+                            <em>(variance = US$ <%=((consultant.contractSum + consultant.contractSum2+ consultant.contractSum3) - (consultant.value))%>)</em></span>
+                            <p><a href="/consultants/<%=consultant._id%>/contractSum">Edit</a></p>
+
 
                     </div> 
                 </div> 
@@ -548,7 +780,11 @@
     <span style="color:rgb(162, 164, 165)">
     
     
-    <% if(consultant.status === "Scheduled") {%>
+        <% if  ((currentUser && consultant.author.equals(currentUser._id) || currentUser &&
+        currentUser.isAdmin || currentUser && currentUser.isADB) 
+        & 
+        (consultant.status==="Scheduled"))
+        {%>
             <div class="row">
                 <div class="col-6">
             <p> <a class="btn btn-sm btn-warning" href="/consultants/<%=consultant._id%>/edit">Edit</a></p>
@@ -568,12 +804,14 @@
 <div class="row">
 
     <!-- Submit EOI -->
-
+    <% if(consultant.status==="Scheduled" || consultant.status==="Advertised" ) {%>
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-            <h3>EOIs (<%=consultant.evaluationcons.length%>)</h3>      
+            <h3>EOIs (<%=consultant.evaluationcons.length%>)</h3>     
+            <% if(consultant.method != "ICS" ){%>
             <p><span style="color:rgb(119, 119, 121); font-size: 0.8em"> Expression Interest at this stage is fully non-committal (for information only). However bidders are informed that as part of a formal bid you will be asked to provide one or more similar contracts concluded in the past 3 years of a value around <strong>US$ <%= (consultant.value*0.8).toLocaleString(undefined, { minimumFractionDigits: 0 })%></strong>, or more and demonstrate having an annual turnover of at least <strong>US$ <%= (consultant.value*1.25).toLocaleString(undefined, { minimumFractionDigits: 0 })%> </strong> (average) measured over past 3 years.</span></p>  
+            <% } %> 
             <p><a class="btn btn-sm btn-primary" href="/consultants/<%=consultant._id%>/evaluationcons/new">Add a new EOI</a> </p> 
             <% for(let evaluationcon of consultant.evaluationcons) {%>
                         <ul>
@@ -586,7 +824,7 @@
             </div>
         </div>
     </div>
-
+    <% } %>
     
 
   

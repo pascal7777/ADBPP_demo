@@ -69,17 +69,17 @@ router.get('/:id', isLoggedIn, catchAsync(async (req, res,) => {
             path: 'author'
         }
     }).populate ({
-        path: 'evaluationcons',
-        populate: {
-            path: 'author'
-        }
-    }).populate ({
         path: 'assessments',
         populate: {
             path: 'author'
         }
     }).populate ({
         path: 'rejects',
+        populate: {
+            path: 'author'
+        }
+    }).populate ({
+        path: 'evaluationcons',
         populate: {
             path: 'author'
         }
@@ -105,6 +105,16 @@ router.get('/:id/status', catchAsync(async (req, res) => {
     }
     res.render('consultants/status', { consultant});
 }))
+
+router.get('/:id/bidOpening', catchAsync(async (req, res) => {
+    const consultant= await Consultant.findById(req.params.id).populate('product');
+    if (!consultant) {
+        req.flash('error', 'This Package was deleted');
+        return res.redirect('/consultants');
+    }
+    res.render('consultants/bidOpening', { consultant});
+}))
+
 
 router.get('/:id/contractSum', catchAsync(async (req, res) => {
     const consultant= await Consultant.findById(req.params.id).populate('product');
@@ -223,7 +233,7 @@ router.post('/:id/evaluationcons/', isLoggedIn, catchAsync(async(req,res) => {
     await consultant.save();
     await evaluationcon.save();
     console.log (evaluationcon)
-    res.redirect(`/works/${id}`)
+    res.redirect(`/consultants/${id}`)
 }))
 
 router.delete('/:id/evaluationcons/:evaluationconId', catchAsync(async (req, res) => {

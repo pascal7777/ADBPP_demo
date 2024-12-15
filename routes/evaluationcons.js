@@ -28,6 +28,11 @@ router.get('/', catchAsync(async (req, res) => {
 }));
 
 
+
+
+
+
+
 router.delete('/:evaluationconId', catchAsync(async (req, res) => {
     const { id, evaluationconId } = req.params;
     await Consultant.findByIdAndUpdate(id, { $pull: { evaluationcons: evaluationconId } });

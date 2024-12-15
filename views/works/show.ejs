@@ -15,7 +15,7 @@
                         <span style="color:rgb(119, 119, 121); font-size: 0.8em"> Submitted by: <%= work.author.username%>
                         <br><em>On: <%= work.createdAt.toDateString()%></em>
                         <% if( (work.createdAt - Date.now())/604800000 <= -1)      {%>
-                            (<%= - Math.floor( (workcreatedAt - Date.now())/1209600000)%> week(s) ago)
+                            (<%= - Math.floor( (work.createdAt - Date.now())/1209600000)%> week(s) ago)
                             <% } %> 
                         </span>
             </div>
@@ -303,33 +303,267 @@
     </div>
 <% } %> 
 <br>
-<!-- Advertising Details for Evaluation--> 
-<% if(work.status==="Evaluation") {%>
-    <div class="accordion" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                            Advertising details
-                            </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <ul>
-                                    <% if(work.advertised!=null) {%>
-                                    <li>BD Advertised/issued on:  <%=work.advertised.toDateString()%>
-                                    </li>
-                                    <li>Bid Submission Deadline on:  <%=work.deadline.toDateString()%>
-                                    </li>
-                                    <% } %> 
-                                </ul>  
-                                <span style="color:rgb(119, 119, 121); font-size: 1em"> <em>Nr days = <%=((work.deadline - work.advertised) / (1000 * 60 * 60 * 24))%></em></span>
-                            <p><a href="/works/<%=work._id%>/advertising">Edit</a></p>
-                               
-                        </div>
-                        </div>
-                        </div>  
+
+<!-- Bid Details for Evaluation--> 
+<% if(work.status==="Evaluation") {%> 
+    <div class="row">   
+    <div class="col-sm-12">      
+        <% if(work.evaluationworks.length===1) {%>
+            <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <%  if(work.evaluationworks.length===0)  {%>
+                    <% } else{ %> 
+                        Bid Opening Details: (<%=work.evaluationworks.length%> bidders)    
+                    <% } %> 
+                </button>
+                </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <ul>
+                        <% if(work.bidOpeningN1!=null) {%>
+                            <li> 
+                            Bidder 1: <%=work.bidOpeningN1%>;    
+                            bid value: US$ <%=work.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(work.lots>1) {%>
+                            for <%=work.bidOpeningL1%> lots
+                            <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV1 - work.value)%>)</em></span>
+                            <% } %> 
+                </ul>  
+                <br>
+    <% if 
+    (currentUser && work.author.equals(currentUser._id) || currentUser &&
+    currentUser.isAdmin || currentUser && currentUser.isADB)
+    {%>
+                            <p><a href="/works/<%=work._id%>/bidOpening">Edit</a></p>
+    <% } %>
+        
+            </div>
+            </div>
+            </div>
+            </div>
+        <% } %> 
+
+        <% if(work.evaluationworks.length===2) {%>
+            <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                   
+                <%  if( work.evaluationworks.length===0)  {%>
+                    <% } else{ %> 
+                        Bid Opening Details: (<%=work.evaluationworks.length%> bidders)   
+                <% } %> 
+                
+                </button>
+                </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                    <ul>
+                        <% if(work.bidOpeningN1!=null) {%>
+                            <li> 
+                            Bidder 1: <%=work.bidOpeningN1%>;    
+                            bid value: US$ <%=work.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(work.lots>1) {%>
+                            for <%=work.bidOpeningL1%> lots
+                            <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV1 - work.value)%>)</em></span>
+                            <% } %> 
+                            <% if(work.bidOpeningN2!=null) {%>
+                            <li> 
+                            Bidder 2: <%=work.bidOpeningN2%>;
+                            bid value: US$ <%=work.bidOpeningV2.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(work.lots>1) {%>
+                            for <%=work.bidOpeningL2%> lots
+                            <% } %>     
+                        </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV2 - work.value)%>)</em></span>
+                            <% } %> 
+                    </ul>  
+                    <br>
+                    <% if  (currentUser && work.author.equals(currentUser._id) || currentUser &&
+                    currentUser.isAdmin || currentUser && currentUser.isADB)
+                    {%>
+                            <p><a href="/works/<%=work._id%>/bidOpening">Edit</a></p>
+                            <% } %>
+        
+            </div>
+            </div>
+            </div>
+            </div>
+        <% } %> 
+
+        <% if(work.evaluationworks.length===3) {%>
+            <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <%  if(work.evaluationworks.length===0)  {%>
+                        <% } else{ %> 
+                                  Bid Opening Details (<%=work.evaluationworks.length%> bidders)
+                        <% } %> 
+                </button>
+                </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                    <ul>
+                        <% if(work.bidOpeningN1!=null) {%>
+                            <li> 
+                            Bidder 1: <%=work.bidOpeningN1%>;    
+                            bid value: US$ <%=work.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(work.lots>1) {%>
+                                for <%=work.bidOpeningL1%> lots
+                                <% } %>   
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV1 - work.value)%>)</em></span>
+                            <% } %> 
+                      
+                            <% if(work.bidOpeningN2!=null) {%>
+                            <li> 
+                            Bidder 2: <%=work.bidOpeningN2%>;
+                            bid value: US$ <%=work.bidOpeningV2.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(work.lots>1) {%>
+                                for <%=work.bidOpeningL2%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV2 - work.value)%>)</em></span>
+                            <% } %> 
+                                
+                            <% if(work.bidOpeningN3!=null) {%>
+                                <li>
+                            Bidder 3: <%=work.bidOpeningN3%>;
+                            bid value: US$ <%=work.bidOpeningV3.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(work.lots>1) {%>
+                                for <%=work.bidOpeningL3%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV3 - work.value)%>)</em></span>
+                            <% } %> 
+                    <br>
+                    <% if  (currentUser && work.author.equals(currentUser._id) || currentUser &&
+                    currentUser.isAdmin || currentUser && currentUser.isADB)
+                    {%>
+                            <p><a href="/works/<%=work._id%>/bidOpening">Edit</a></p>
+                            <% } %>
+        
+            </div>
+            </div>
+            </div>
+            </div>
+        <% } %> 
+
+
+        <% if(work.evaluationworks.length>3) {%>
+            <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <%  if( work.evaluationworks.length===0)  {%>
+                        <% } else{ %> 
+                                  Bid Opening Details (<%=work.evaluationworks.length%> bidders)
+                        <% } %> 
+                </button>
+                </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                    <ul>
+                        <% if(work.bidOpeningN1!=null) {%>
+                            <li> 
+                        Bidder 1: <%=work.bidOpeningN1%>;    
+                            bid value: US$ <%=work.bidOpeningV1.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(work.lots>1) {%>
+                                for <%=work.bidOpeningL1%> lots
+                                <% } %>   
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV1 - work.value)%>)</em></span>
+                        <% } %> 
+                      
+                            <% if(work.bidOpeningN2!=null) {%>
+                            <li> 
+                        Bidder 2: <%=work.bidOpeningN2%>;
+                            bid value: US$ <%=work.bidOpeningV2.toLocaleString(undefined, { minimumFractionDigits: 0 })%> 
+                            <% if(work.lots>1) {%>
+                                for <%=work.bidOpeningL2%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV2 - work.value)%>)</em></span>
+                        <% } %> 
+                            <% if(work.bidOpeningN3!=null) {%>
+                                <li>
+                        Bidder 3: <%=work.bidOpeningN3%>;
+                            bid value: US$ <%=work.idOpeningV3.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(work.lots>1) {%>
+                                for <%=work.bidOpeningL3%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV3 - work.value)%>)</em></span>
+                        <% } %> 
+                        <% if(work.bidOpeningN4!=null) {%>
+                            <li>
+                        Bidder 4: <%=work.bidOpeningN4%>;
+                            bid value: US$ <%=work.bidOpeningV4.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(work.lots>1) {%>
+                                for <%=work.bidOpeningL4%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV4 - work.value)%>)</em></span>
+                            <% } %> 
+                            <% if(work.bidOpeningN5!=null) {%>
+                                <li>
+                        Bidder 5: <%=work.bidOpeningN5%>;
+                            bid value: US$ <%=work.bidOpeningV5.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(work.lots>1) {%>
+                                for <%=work.bidOpeningL5%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV5 - workvalue)%>)</em></span>
+                            <% } %> 
+                            <% if(work.bidOpeningN6!=null) {%>
+                                <li>
+                        Bidder 6: <%=workbidOpeningN6%>;
+                            bid value: US$ <%=work.bidOpeningV6.toLocaleString(undefined, { minimumFractionDigits: 0 })%>
+                            <% if(work.lots>1) {%>
+                                for <%=work.bidOpeningL6%> lots
+                                <% } %> 
+                            </li>
+                            <span style="color:rgb(119, 119, 121); font-size: 1em"><em>
+                                (variance = US$ <%=(work.bidOpeningV6 - work.value)%>)</em></span>
+                            <% } %> 
+
+                    <br>
+                    <% if  (currentUser && work.author.equals(currentUser._id) || currentUser &&
+                    currentUser.isAdmin || currentUser && currentUser.isADB)
+                    {%>
+                            <p><a href="/works/<%=work._id%>/bidOpening">Edit</a></p>
+                    <% } %>
+        
+            </div>
+            </div>
+            </div>
+            </div>
+        <% } %> 
+
+
+
     </div>
-<% } %> 
+    </div>
+    <% } %>
+
 <br>
 <!-- Contract Details --> 
 <% if(work.status==="Awarded") {%>
@@ -445,6 +679,12 @@
                                             </li>
                                     <% } %> 
                                 
+                                    <% if(work.contractComp!=null) {%>
+                                        <li> 
+                                        Contractor: <%=work.contractComp%>
+                                        </li>
+                                    <% } %> 
+
                                     <% if(work.contractName!=null) {%>
                                             <li> 
                                             Name: <%=work.contractName%>
@@ -475,9 +715,15 @@
                                             </li>
                                     <% } %> 
                                 
+                                    <% if(work.contractComp2!=null) {%>
+                                        <li> 
+                                        Contractor: <%=work.contractComp2%>
+                                        </li>
+                                    <% } %> 
+                                
                                     <% if(work.contractName2!=null) {%>
                                             <li> 
-                                            Name: <%=work.contractName2%>
+                                        Contract Name: <%=work.contractName2%>
                                             </li>
                                     <% } %> 
                     
@@ -504,10 +750,16 @@
                                             Signed: <%=work.contractDate3.toDateString() %>
                                             </li>
                                     <% } %> 
+
+                                    <% if(work.contractComp3!=null) {%>
+                                        <li> 
+                                        Contractor: <%=work.contractComp3%>
+                                        </li>
+                                    <% } %> 
                                 
                                     <% if(work.contractName3!=null) {%>
                                             <li> 
-                                            Name: <%=work.contractName3%>
+                                            Contract Name: <%=work.contractName3%>
                                             </li>
                                     <% } %> 
                     
@@ -529,8 +781,8 @@
                         <br>
 
                         <span style="color:rgb(119, 119, 121); font-size: 1em"> TotalValue = US$ <%=(work.contractSum + work.contractSum2 + work.contractSum3).toLocaleString(undefined, { minimumFractionDigits: 0 })%>
-                        <em>(variance = US$ <%=((work.lot1v + work.lot2v + work.lot3v) - (work.contractSum + work.contractSum2 + work.contractSum3))%>)</em></span>
-                        <p><a href="/works/<%=work._id%>/contractSum">Edit</a></p>
+                            <em>(variance = US$ <%=((work.contractSum + work.contractSum2+ work.contractSum3) - (work.value)).toLocaleString(undefined, { minimumFractionDigits: 0 })%>)</em></span>
+                            <p><a href="/works/<%=work._id%>/contractSum">Edit</a></p>
 
                     </div> 
                 </div> 
@@ -548,7 +800,11 @@
     <span style="color:rgb(162, 164, 165)">
     
     
-    <% if(work.status === "Scheduled") {%>
+        <% if  ((currentUser && work.author.equals(currentUser._id) || currentUser &&
+        currentUser.isAdmin || currentUser && currentUser.isADB) 
+        & 
+        (work.status==="Scheduled"))
+        {%>
             <div class="row">
                 <div class="col-6">
             <p> <a class="btn btn-sm btn-warning" href="/works/<%=work._id%>/edit">Edit</a></p>
@@ -568,7 +824,7 @@
 <div class="row">
 
     <!-- Submit EOI -->
-
+    <% if(work.status==="Scheduled" || work.status==="Advertised" ) {%>
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
@@ -586,7 +842,7 @@
             </div>
         </div>
     </div>
-
+    <% } %>
 
     <!-- Evaluation Comments (checks)--> 
     <% if(work.status==="Evaluation") {%>  

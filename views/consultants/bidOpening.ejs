@@ -1,0 +1,329 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container mt-3">
+    
+   
+         <form action="/consultants/<%=consultant._id%>?_method=PUT" method="POST" novalidate class = "validated-form">
+
+        <% if(consultant.evaluationcons.length===1) {%>
+                <div class="row">  
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                            <label class="form-label" for="bidOpeningN1">Bidder 1 Name</label>
+                            <input class="form-control" type="text" id="bidOpeningN1" name="consultant[bidOpeningN1]" value="<%=consultant.bidOpeningN1%>">
+                    </div>
+                </div>
+    
+              
+
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningV1">Bidder 1 Bid Price (US$)</label>
+                        <input class="form-control" type="number" id="bidOpeningV1" name="consultant[bidOpeningV1]" value="<%=consultant.bidOpeningV1%>">
+                    </div>
+                </div>
+            </div>
+            <% if(consultant.lots>1) {%>  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningL1">Bidder 1 Nr of Lots</label>
+                    <input class="form-control" type="number" id="bidOpeningL1" name="consultant[bidOpeningL1]" value="<%=consultant.bidOpeningL1%>">
+                </div>
+            </div>
+            <% } %> 
+        </div>
+            <% } %> 
+                
+
+        <% if(consultant.evaluationcons.length===2) {%>
+                <div class="row">  
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                            <label class="form-label" for="bidOpeningN1">Bidder 1 Name</label>
+                            <input class="form-control" type="text" id="bidOpeningN1" name="consultant[bidOpeningN1]" value="<%=consultant.bidOpeningN1%>">
+                    </div>
+                </div>
+    
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningV1">Bidder 1 Bid Price (US$)</label>
+                        <input class="form-control" type="number" id="bidOpeningV1" name="consultant[bidOpeningV1]" value="<%=consultant.bidOpeningV1%>">
+                    </div>
+                </div>
+                <% if(consultant.lots>1) {%>  
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningL1">Bidder 1 Nr of Lots</label>
+                        <input class="form-control" type="number" id="bidOpeningL1" name="consultant[bidOpeningL1]" value="<%=consultant.bidOpeningL1%>">
+                    </div>
+                </div>
+                <% } %> 
+            </div>
+            <div class="row">  
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                            <label class="form-label" for="bidOpeningN2">Bidder 2 Name</label>
+                            <input class="form-control" type="text" id="bidOpeningN2" name="consultant[bidOpeningN2]" value="<%=consultant.bidOpeningN2%>">
+                    </div>
+                </div>
+    
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningV2">Bidder 2 Bid Price (US$)</label>
+                        <input class="form-control" type="number" id="bidOpeningV2" name="consultant[bidOpeningV2]" value="<%=consultant.bidOpeningV2%>">
+                    </div>
+                </div>
+                <% if(consultant.lots>1) {%>  
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningL2">Bidder 2 Nr of Lots</label>
+                        <input class="form-control" type="number" id="bidOpeningL2" name="consultant[bidOpeningL2]" value="<%=consultant.bidOpeningL2%>">
+                    </div>
+                </div>
+                <% } %> 
+            </div>
+       
+            <% } %> 
+                
+
+    <% if(consultant.evaluationcons.length===3) {%>
+            <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningN1">Bidder 1 Name</label>
+                        <input class="form-control" type="text" id="bidOpeningN1" name="consultant[bidOpeningN1]" value="<%=consultant.bidOpeningN1%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningV1]">Bidder 1 Bid Price (US$)</label>
+                    <input class="form-control" type="number" id="bidOpeningV1]" name="consultant[bidOpeningV1]" value="<%=consultant.bidOpeningV1%>">
+                </div>
+                <% if(consultant.lots>1) {%>
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningL1">Bidder 1 Nr of Lots</label>
+                        <input class="form-control" type="number" id="bidOpeningL1" name="consultant[bidOpeningL1]" value="<%=consultant.bidOpeningL1%>">
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningN2">Bidder 2 Name</label>
+                        <input class="form-control" type="text" id="bidOpeningN2" name="consultant[bidOpeningN2]" value="<%=consultant.bidOpeningN2%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningV2">Bidder 2 Bid Price (US$)</label>
+                    <input class="form-control" type="number" id="bidOpeningV2" name="consultant[bidOpeningV2]" value="<%=consultant.bidOpeningV2%>">
+                </div>
+            </div>
+            <% if(consultant.lots>1) {%>
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningL2">Bidder 2 Nr of Lots</label>
+                    <input class="form-control" type="number" id="bidOpeningL2" name="consultant[bidOpeningL2]" value="<%=consultant.bidOpeningL2%>">
+                </div>
+            </div>
+            <% } %> 
+        </div>
+
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningN3">Bidder 3 Name</label>
+                        <input class="form-control" type="text" id="bidOpeningN3" name="consultant[bidOpeningN3]" value="<%=consultant.bidOpeningN3%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningV3">Bidder 3 Bid Price (US$)</label>
+                    <input class="form-control" type="number" id="bidOpeningV3" name="consultant[bidOpeningV3]" value="<%=consultant.bidOpeningV3%>">
+                </div>
+            </div>
+            <% if(consultant.lots>1) {%>       
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningL3">Bidder 3 Nr of Lots</label>
+                    <input class="form-control" type="number" id="bidOpeningL3" name="consultant[bidOpeningL3]" value="<%=consultant.bidOpeningL3%>">
+                </div>
+            </div>
+            <% } %> 
+        </div>
+    <% } %> 
+            
+                        
+
+    <% if(consultant.evaluationcons.length>3) {%>
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningN1">Bidder 1 Name</label>
+                        <input class="form-control" type="text" id="bidOpeningN1" name="consultant[bidOpeningN1]" value="<%=consultant.bidOpeningN1%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningV1]">Bidder 1 Bid Price (US$)</label>
+                    <input class="form-control" type="number" id="bidOpeningV1]" name="consultant[bidOpeningV1]" value="<%=consultant.bidOpeningV1%>">
+                </div>
+                <% if(consultant.lots>1) {%>
+                <div class="col-sm-6">
+                    <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningL1">Bidder 1 Nr of Lots</label>
+                        <input class="form-control" type="number" id="bidOpeningL1" name="consultant[bidOpeningL1]" value="<%=consultant.bidOpeningL1%>">
+                    </div>
+                </div>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningN2">Bidder 2 Name</label>
+                        <input class="form-control" type="text" id="bidOpeningN2" name="consultant[bidOpeningN2]" value="<%=consultant.bidOpeningN2%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningV2">Bidder 2 Bid Price (US$)</label>
+                    <input class="form-control" type="number" id="bidOpeningV2" name="consultant[bidOpeningV2]" value="<%=consultant.bidOpeningV2%>">
+                </div>
+            </div>
+            <% if(consultant.lots>1) {%>
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningL2">Bidder 2 Nr of Lots</label>
+                    <input class="form-control" type="number" id="bidOpeningL2" name="consultant[bidOpeningL2]" value="<%=consultant.bidOpeningL2%>">
+                </div>
+            </div>
+            <% } %> 
+        </div>
+
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningN3">Bidder 3 Name</label>
+                        <input class="form-control" type="text" id="bidOpeningN3" name="consultant[bidOpeningN3]" value="<%=consultant.bidOpeningN3%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningV3">Bidder 3 Bid Price (US$)</label>
+                    <input class="form-control" type="number" id="bidOpeningV3" name="consultant[bidOpeningV3]" value="<%=consultant.bidOpeningV3%>">
+                </div>
+            </div>
+            <% if(consultant.lots>1) {%>       
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningL3">Bidder 3 Nr of Lots</label>
+                    <input class="form-control" type="number" id="bidOpeningL3" name="consultant[bidOpeningL3]" value="<%=consultant.bidOpeningL3%>">
+                </div>
+            </div>
+            <% } %> 
+        </div>
+
+              
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningN4">Bidder 4 Name</label>
+                        <input class="form-control" type="text" id="bidOpeningN4" name="consultant[bidOpeningN4]" value="<%=consultant.bidOpeningN4%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningV4">Bidder 4 Bid Price (US$)</label>
+                    <input class="form-control" type="number" id="bidOpeningV4" name="consultant[bidOpeningV4]" value="<%=consultant.bidOpeningV4%>">
+                </div>
+            </div>
+            <% if(consultant.lots>1) {%>       
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningL4">Bidder 4 Nr of Lots</label>
+                    <input class="form-control" type="number" id="bidOpeningL4" name="consultant[bidOpeningL4]" value="<%=consultant.bidOpeningL4%>">
+                </div>
+            </div>
+            <% } %> 
+        </div>
+
+                 
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningN5">Bidder 5 Name</label>
+                        <input class="form-control" type="text" id="bidOpeningN5" name="consultant[bidOpeningN5]" value="<%=consultant.bidOpeningN5%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningV5">Bidder 5 Bid Price (US$)</label>
+                    <input class="form-control" type="number" id="bidOpeningV5" name="consultant[bidOpeningV5]" value="<%=consultant.bidOpeningV5%>">
+                </div>
+            </div>
+            <% if(consultant.lots>1) {%>       
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningL5">Bidder 5 Nr of Lots</label>
+                    <input class="form-control" type="number" id="bidOpeningL5" name="consultant[bidOpeningL5]" value="<%=consultant.bidOpeningL5%>">
+                </div>
+            </div>
+            <% } %> 
+        </div>
+           
+        
+        <div class="row">  
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                        <label class="form-label" for="bidOpeningN6">Bidder 6 Name</label>
+                        <input class="form-control" type="text" id="bidOpeningN6" name="consultant[bidOpeningN6]" value="<%=consultant.bidOpeningN6%>">
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningV6">Bidder 6 Bid Price (US$)</label>
+                    <input class="form-control" type="number" id="bidOpeningV6" name="consultant[bidOpeningV6]" value="<%=consultant.bidOpeningV6%>">
+                </div>
+            </div>
+            <% if(consultant.lots>1) {%>       
+            <div class="col-sm-6">
+                <div class="mb-3 mt-3">
+                    <label class="form-label" for="bidOpeningL6">Bidder 6 Nr of Lots</label>
+                    <input class="form-control" type="number" id="bidOpeningL6" name="consultant[bidOpeningL6]" value="<%=consultant.bidOpeningL6%>">
+                </div>
+            </div>
+            <% } %> 
+        </div>
+              
+                     
+          
+    </div>
+    <% } %> 
+           
+
+       
+
+
+        
+            <div class="mb-3">
+                <button class=" btn btn-warning btn-sm">Confirm</button>
+            </div>
+              
+    </form>
+
+</div>

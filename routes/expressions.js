@@ -117,6 +117,15 @@ router.get('/:id/subLots', catchAsync(async (req, res) => {
     res.render('expressions/subLots', { expression});
 }))
 
+router.get('/:id/bidOpening', catchAsync(async (req, res) => {
+    const expression= await Expression.findById(req.params.id).populate('product');
+    if (!expression) {
+        req.flash('error', 'This Package was deleted');
+        return res.redirect('/expressions');
+    }
+    res.render('expressions/bidOpening', { expression});
+}))
+
 router.get('/:id/contractSum', catchAsync(async (req, res) => {
     const expression= await Expression.findById(req.params.id).populate('product');
     if (!expression) {
